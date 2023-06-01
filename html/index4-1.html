@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 画板 -->
+    <link rel="stylesheet" href="../css/drawing_board/lemon_drawing.css">
+    <style media="screen">
+        #download,
+        #eraser,
+        #pen {
+            display: none;
+        }
+
+        .actions {
+            left: 77.5%;
+            top: 22%;
+            z-index: 1;
+        }
+
+        #xxx,
+        #myImg {
+            position: absolute;
+            left: 38.5%;
+            top: 23%;
+            height: 53.3%;
+            width: 43.2%;
+            border-radius: 15px;
+            /* background-color: rgba(255, 0, 0, 0.3); */
+        }
+
+        #myImg {
+            z-index: 1;
+            display: none;
+        }
+
+        .confrim {
+            position: absolute;
+            width: 13%;
+            height: 5.5%;
+            right: 18%;
+            bottom: 20.5%;
+            z-index: 2;
+            /* background-color: rgba(241, 241, 24, 0.5); */
+        }
+
+        .close {
+            position: absolute;
+            width: 3.8%;
+            height: 6.3%;
+            right: 3%;
+            top: 0%;
+            z-index: 2;
+            /* background-color: rgba(241, 241, 24, 0.5); */
+        }
+    </style>
+
+    <!-- style适配meta10 -->
+    <style>
+        @media screen and (max-width: 1000px) {
+
+            .actions {
+                left: 77.5%;
+                top: 22%;
+            }
+
+            #xxx,
+            #myImg {
+                left: 38.5%;
+                top: 22%;
+                height: 55.4%;
+                width: 43.2%;
+            }
+
+            .confrim {
+                width: 13%;
+                height: 5.5%;
+                right: 18%;
+                bottom: 21%;
+            }
+
+            .close {
+                width: 3.8%;
+                height: 6.3%;
+                right: 3%;
+                top: 0%;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- content -->
+        <div class="content-wrapper">
+            <!-- 画板图标 -->
+            <div id=actions class="actions">
+                <svg id=pen class="active icon">
+                    <use xlink:href="#icon-pen"></use>
+                </svg>
+                <svg id=eraser class="icon">
+                    <use xlink:href="#icon-erase"></use>
+                </svg>
+                <svg id=clear class="icon">
+                    <use xlink:href="#icon-clear"></use>
+                </svg>
+                <svg id=download t="1629860963796" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="9311" width="200" height="200">
+                    <path
+                        d="M512 975.56c-62.57 0-123.28-12.26-180.45-36.44-55.2-23.35-104.78-56.77-147.34-99.33-42.56-42.56-75.98-92.13-99.33-147.34C60.7 635.28 48.44 574.57 48.44 512S60.7 388.72 84.88 331.55c23.35-55.2 56.77-104.78 99.33-147.34 42.56-42.56 92.14-75.98 147.34-99.33C388.72 60.7 449.43 48.44 512 48.44S635.28 60.7 692.45 84.88c55.2 23.35 104.78 56.77 147.34 99.33 42.56 42.56 75.98 92.13 99.33 147.34 24.18 57.17 36.44 117.88 36.44 180.45s-12.26 123.28-36.44 180.45c-23.35 55.2-56.77 104.78-99.33 147.34-42.56 42.56-92.14 75.98-147.34 99.33-57.17 24.18-117.88 36.44-180.45 36.44z m0-864.12c-220.87 0-400.56 179.69-400.56 400.56S291.13 912.56 512 912.56 912.56 732.87 912.56 512 732.87 111.44 512 111.44z"
+                        p-id="9312" fill="#666666"></path>
+                    <path
+                        d="M456.83 722.55L240.05 545.19c-13.46-11.02-15.45-30.86-4.43-44.33 11.02-13.46 30.86-15.45 44.33-4.43l170.92 139.84 290.02-313.09c11.82-12.76 31.75-13.52 44.52-1.7s13.52 31.75 1.7 44.52L456.83 722.55z"
+                        p-id="9313" fill="#666666"></path>
+                </svg>
+            </div>
+
+            <!-- 画板 -->
+            <canvas id="xxx" class="imgUrl"></canvas>
+            <img id="myImg" src="">
+
+            <!-- 关闭按钮 -->
+            <div class="close" id="close" tapmode onclick="closeOrderMask()"></div>
+
+            <!-- 确定按钮 -->
+            <div class="confrim" id="confrim" tapmode onclick="final_confirm()"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/message.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script type="text/javascript" src="../script/index3-4/bodytest.js"></script>
+<script type="text/javascript" src="../script/index3-4/project.js"></script>
+
+<!-- 画板 -->
+<script src="../script/drawing_board/lemon_drawing_main.js"></script>
+<script src="../script/drawing_board/lemon_drawing.js"></script>
+<script type="text/javascript">
+    let save_record_params = {}
+    apiready = function () {
+
+        let img = api.pageParam.img
+        if (img != '' && img != undefined && img != '' && img != null && img != []) {
+            $api.addCls($api.byId('confrim'), 'disabled')
+            $api.attr($api.byId('myImg'), 'src', apiBaseUrl2 + img)
+            $api.css($api.byId('myImg'), 'display:block')
+            $api.css($api.byId('actions'), 'display:none')
+        }
+
+        // console.log($api.attr($api.byId('myImg'), 'src'));
+
+        if (api.pageParam.save_record_params) {
+            save_record_params = api.pageParam.save_record_params
+        }
+    }
+
+    /* canvs转图片 */
+    function final_confirm() {
+        var oCanvas = document.getElementById("xxx");
+        var strDataURI = oCanvas.toDataURL();
+        var trans = api.require('trans');
+        trans.saveImage({
+            base64Str: strDataURI.slice(22),
+            imgPath: "fs://picture/",
+            imgName: "signature.png"
+        }, function (ret, err) {
+            if (ret.status) {
+                console.log(api.fsDir + '/picture/signature.png');
+                save_recordFn()
+            } else {
+                alert(JSON.stringify(e.msg))
+            }
+        });
+    }
+
+    /* 订单mask */
+    function closeOrderMask() {
+        api.sendEvent({
+            name: 'closeOrderMask'
+        })
+    }
+
+    /* 保存记录 */
+    function save_recordFn() {
+        let answerCache = $api.getStorage('answerCache') ? $api.getStorage('answerCache') : [] // 答案缓存
+        let answerCacheId = 0 // 答案缓存id
+        if (answerCache.length != 0) {
+            for (let i = 0; i < answerCache.length; i++) {
+                if (!answerCache[i] || !answerCache[i].user) break;
+                if (answerCache[i].user.id == save_record_params.user_id) { // 如果人匹配
+                    answerCacheId = i
+                    answerCache[answerCacheId].save_record_params = save_record_params
+                    console.log(JSON.stringify(answerCache[answerCacheId]));
+                    break;
+                } else {
+                    answerCacheId = -1
+                }
+            }
+        }
+        $api.setStorage('answerCache', answerCache)
+        loding('show', '订单提交中...')
+        save_record(save_record_params).then(e => {
+            if (answerCache.length != 0) {
+                for (let i = 0; i < answerCache.length; i++) {
+                    if (!answerCache[i] || !answerCache[i].user) break;
+                    if (answerCache[i].user.id == save_record_params.user_id) { // 如果人匹配
+                        answerCacheId = i
+                        answerCache[answerCacheId].answer = []
+                        answerCache[answerCacheId].answerId = 0
+                        answerCache[answerCacheId].save_record_params = {}
+                        break;
+                    } else {
+                        answerCacheId = -1
+                    }
+                }
+            }
+            $api.setStorage('answerCache', answerCache)
+        }).catch(() => { }).finally(() => {
+            setTimeout(() => {
+                api.closeFrame({ name: 'index4' })
+                api.closeFrame({ name: 'index4-1' })
+                api.closeFrame({ name: 'index3-5' })
+                set_tabBar('index3-2', 'notab', null, null, '3')
+                dataInitialize()
+                loding('hide')
+            }, 350)
+        })
+    }
+</script>
+
+</html>

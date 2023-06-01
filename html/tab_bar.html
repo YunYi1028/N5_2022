@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<style media="screen">
+		div.nav {
+			background-image: '';
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 100%;
+			width: 100%;
+			left: 0;
+			bottom: 0;
+			transition: 0.25s all;
+		}
+
+		body {
+			background-color: transparent;
+		}
+
+		.sbtns {
+			transition: 1s
+		}
+
+		.normal {
+			position: absolute;
+			width: auto;
+			height: 33px;
+			top: 42px;
+			opacity: 0;
+			transition: 0.25s
+		}
+
+		.main {
+			position: absolute;
+			width: auto;
+			height: 41px;
+			top: 28px;
+			opacity: 0;
+			transition: 0.25s;
+		}
+
+		#btn1 {
+			left: 5.3%;
+		}
+
+		#btn2 {
+			left: 30%;
+		}
+
+		#btn3 {
+			left: 51%;
+		}
+
+		#btn4 {
+			right: 4%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="nav" id="nav">
+		<img src="../image/index_tab_normal_on.png" alt="" class="normal" id="btn1" tapmode onclick="set_tabBar(1)">
+		<img src="../image/index_tab_main_on.png" alt="" class="main" id="btn2" tapmode onclick="set_tabBar(2)">
+		<img src="../image/index_tab_main_on.png" alt="" class="main" id="btn3" tapmode onclick="set_tabBar(3)">
+		<img src="../image/index_tab_normal_on.png" alt="" class="normal" id="btn4" tapmode onclick="set_tabBar(4)">
+	</div>
+	<div id="bgm">
+		<audio id="click" src="../res/click.wav"></audio>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript">
+	let _judge = _judgeFn()
+	let _src = ''
+	if (_judge == '春季') {
+		_src = 'url("../image/index_tab_2_chun.png")'
+	} else if (_judge == '夏季') {
+		_src = 'url("../image/index_tab_2_xia.png")'
+	} else if (_judge == '秋季') {
+		_src = 'url("../image/index_tab_2_qiu.png")'
+	} else if (_judge == '冬季') {
+		_src = 'url("../image/index_tab_2_don.png")'
+	}
+
+	let nav = document.getElementById('nav')
+	nav.style.backgroundImage = _src 
+	var loginState = $api.getStorage('loginState');
+	apiready = function () {
+		api.parseTapmode();
+		let tabState = api.pageParam.tabState
+		if (tabState) {
+			// tds.js 函数
+			set_tabBar(tabState)
+		}
+
+		/* 初始化tabBar <= tds.js */
+		api.addEventListener({
+			name: 'set_tabBar'
+		}, function (ret, err) {
+			set_tabBar(-1)
+		});
+
+		/* 设置tabBarCss <= tds.js */
+		api.addEventListener({
+			name: 'set_tabBarcss'
+		}, function (ret, err) {
+			$api.byId('btn1').style.opacity = 0;
+			$api.byId('btn2').style.opacity = 0;
+			$api.byId('btn3').style.opacity = 0;
+			$api.byId('btn4').style.opacity = 0;
+			if (ret.value) {
+				$api.byId('btn' + ret.value).style.opacity = 1;
+			}
+		});
+
+		/* 显示隐藏tabBar <= index3-4 */
+		api.addEventListener({
+			name: 'set_tabBar_css'
+		}, function (ret, err) {
+			if (ret.value.params == 'hide') {
+				$api.byId('nav').style.bottom = '-90px'
+			} else {
+				$api.byId('nav').style.bottom = '0px'
+			}
+		});
+
+	}
+</script>
+
+</html>

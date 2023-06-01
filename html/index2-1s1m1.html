@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<style media="screen">
+		body {
+			margin: 0;
+			background-color: transparent;
+		}
+	
+		.bg {
+			transition: 0.5s;
+		}
+		
+		.mbtn{
+			position: absolute;
+			width: 57px;
+			height: 60px;
+			transition: 0.5s;
+		}
+
+		#btn1{
+			left: 480px;
+			top: 155px;
+		}
+
+		#btn2{
+			left: 447px;
+			top: 191px;
+		}
+
+		#btn3{
+			left: 360px;
+			top: 200px;
+		}
+
+		#btn4{
+			left: 434px;
+			top: 275px;
+		}
+	</style>
+</head>
+
+<body>
+		<img src="../image/index2/index2-1/slide1-m1/bg1.png" alt="" class="bg" id="bg1">
+		<img src="../image/index2/index2-1/slide1-m1/bg2.png" alt="" class="bg" id="bg2">
+		<img src="../image/index2/index2-1/slide1-m1/bg3.png" alt="" class="bg" id="bg3">
+		<img src="../image/index2/index2-1/slide1-m1/bg4.png" alt="" class="bg" id="bg4">
+		<img src="../image/index2/index2-1/slide1-m1/btn.png" alt="" class="mbtn" id="btn1" tapmode onclick="show(1)">
+		<img src="../image/index2/index2-1/slide1-m1/btn.png" alt="" class="mbtn" id="btn2" tapmode onclick="show(2)">
+		<img src="../image/index2/index2-1/slide1-m1/btn.png" alt="" class="mbtn" id="btn3" tapmode onclick="show(3)">
+		<img src="../image/index2/index2-1/slide1-m1/btn.png" alt="" class="mbtn" id="btn4" tapmode onclick="show(4)">
+	<img src="../image/crossbtn.png" alt="" class="crossbtn" tapmode onclick="closeFn()">
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/anime.js"></script>
+	<script type="text/javascript" src="../script/tds1.0.js"></script>
+	<script type="text/javascript" src="../script/ajax.js"></script>
+	<script type="text/javascript">
+		apiready = function () {
+			api.parseTapmode();
+			show(1)
+		}
+
+		function show(num){
+			$api.byId('btn1').style.opacity = 1
+			$api.byId('btn2').style.opacity = 1
+			$api.byId('btn3').style.opacity = 1
+			$api.byId('btn4').style.opacity = 1
+			$api.byId('bg1').style.opacity = 0
+			$api.byId('bg2').style.opacity = 0
+			$api.byId('bg3').style.opacity = 0
+			$api.byId('bg4').style.opacity = 0
+			$api.byId('btn' + num).style.opacity = 0
+			$api.byId('bg' + num).style.opacity = 1
+		}
+
+		/* tabCreate关闭按钮fn */
+		function closeFn() {
+			closeFrame()
+		}
+	</script>
+</body>
+
+</html>

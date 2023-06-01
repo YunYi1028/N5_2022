@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语音听写</title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <style media="screen">
+        .bg {
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .centent {
+            /* width: 450px;
+            height: 470px; */
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+            border: 1px solid #fbcdab;
+            background-color: #fff;
+            border-radius: 20px;
+            /* position: absolute;
+            left: 20px;
+            bottom: 40px; */
+        }
+
+        .title {
+            width: 100%;
+            padding: 20px 0 20px 0;
+        }
+
+        .icon {
+            height: 40px;
+            margin-right: 4px;
+        }
+
+        .icon img {
+            width: auto;
+            height: 100%;
+        }
+
+        .h1 {
+            font-size: 21px;
+            font-family: 'OPPOSans-B';
+        }
+
+        .p {
+            font-size: 12px;
+            font-family: 'OPPOSans-B';
+        }
+
+        .content-ASR {
+            width: calc(100% - 20px);
+            height: calc(100% - 84px - 100px);
+            background-color: #f1f1f1;
+            border-radius: 20px;
+            margin: auto;
+            overflow: hidden;
+            overflow-x: auto;
+            padding: 10px;
+            box-sizing: border-box;
+            font-family: 'OPPOSans-M';
+            font-size: 14px;
+        }
+
+        .content-btn-wrapper {
+            width: 100%;
+            height: 100px;
+        }
+
+        .content-btn {
+            width: auto;
+            height: 40px;
+            padding: 0 30px;
+            border-radius: 20px;
+            color: #fefefe;
+            background-color: #444444;
+            font-size: 16px;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            width: 40px;
+        }
+
+        .score {
+            width: 100%;
+            display: none;
+        }
+
+        .score .h1 {
+            padding: 20px 0 10px 0;
+            position: relative;
+        }
+
+        .score .h1 .p {
+            position: absolute;
+            color: #7b7b7b;
+            bottom: 12px;
+            left: 100%;
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+
+        #score-ASR {
+            height: 70px;
+            font-family: 'OPPOSans-B';
+            font-size: 46px;
+        }
+
+        #title2,
+        #content-btn2 {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="content-wrapper">
+            <div class="centent">
+                <img class="close" src="../image/icon/closebtn.png" alt="" onclick="closeFrame()">
+                <div class="title flex" id="title1">
+                    <div class="icon">
+                        <img src="../image/voice/voiceGif.gif" alt="">
+                    </div>
+                    <div class="flex-d">
+                        <div class="h1">正在聆听</div>
+                        <div class="p">请保持环境安静</div>
+                    </div>
+                </div>
+                <div class="title flex" id="title2">
+                    <div class="h1">考核结果</div>
+                </div>
+                <div class="content-ASR" id="content-ASR"></div>
+                <div class="score flex-d" id="score">
+                    <div class="h1">本次得分<div class="p">（每字0.8分，总分100）</div>
+                    </div>
+                    <div class="content-ASR flex" id="score-ASR"></div>
+                </div>
+                <div class="content-btn-wrapper flex">
+                    <button class="content-btn" id="content-btn" onclick="iflyRecognitionFn(0)">立即提交</button>
+                    <button class="content-btn" id="content-btn2" onclick="iflyRecognitionFn(1)">再试一次</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script type="text/javascript" src="../script/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    var iflyRecognition = ''
+    apiready = function () {
+        api.parseTapmode();
+
+        requestPermissionFn()
+    }
+
+    /* 申请权限 */
+    function requestPermissionFn() {
+        let permission = 'microphone';
+        let resultList = api.hasPermission({
+            list: [permission]
+        });
+        if (resultList[0].granted) {
+            // 已授权，可以继续下一步操作
+            // api.alert({
+            //     msg: '已授权'
+            // });
+            createUtilityFn()
+        } else {
+            api.confirm({
+                msg: '应用需要您的授权才能访问麦克风',
+                buttons: ['取消', '去设置']
+            }, function (ret) {
+                if (ret.buttonIndex == 2) {
+                    api.requestPermission({
+                        list: [permission],
+                    }, function (res) {
+                        if (res.list[0].granted) {
+                            // 已授权，可以继续下一步操作
+                            api.alert({
+                                msg: '已授权'
+                            });
+                            createUtilityFn()
+                        }
+                    });
+                }
+            });
+        }
+    }
+
+    /* 创建科大讯飞引擎 */
+    function createUtilityFn() {
+        iflyRecognition = api.require('iflyRecognition');
+        iflyRecognition.createUtility({
+            android_appid: '78c85c0a'   // 填写讯飞平台上获得的appid 
+        }, function (ret, err) {
+            if (ret.status) {
+                // api.alert({
+                //     msg: '创建成功'
+                // });
+                iflyRecognitionFn(1)
+            } else {
+                api.alert({
+                    msg: "创建失败"
+                });
+            }
+        });
+    }
+
+    let wordStr = {}
+    let num = 0
+    /* 开始录音 */
+    function iflyRecognitionFn(params) {
+        if (params == 1) {
+            wordStr = {}
+            num = 0
+            $('#title1').css('display', 'flex')
+            $('#title2').css('display', 'none')
+            $('#score').css('display', 'none')
+            $('#content-ASR').css('height', 'calc(100% - 84px - 100px)')
+            $('#score-ASR').html(0)
+            $api.html($api.byId('content-ASR'), '');
+            $('#content-btn').css('display', 'block')
+            $('#content-btn2').css('display', 'none')
+            recordFn()
+        } else if (params == 0) {
+            stopRecordFn()
+        }
+    }
+
+    /* 识别语音返回文字 */
+    function recordFn() {
+        num++
+        iflyRecognition.record({
+            vadbos: 10000, // 前断点时间（静音时间，即用户多长时间不说话做超时处理），范围是0-10000单位ms
+            vadeos: 10000, // 后断点时间（静音时间，即用户多长时间不说话做超时处理），单位ms，范围是0-10000
+            rate: 16000, // 采样率（支持16000，8000）
+            asrptt: 1, // 返回的语句是否有标点符号，取值范围：0-无，1-有
+            audioPath: 'fs://speechRecogniser/speech.pcm'
+        }, function (ret, err) {
+            if (ret.status) {
+                if (hasSpecialStr(ret.wordStr)) {
+                    $api.append($api.byId('content-ASR'), ret.wordStr);
+                } else {
+                    wordStr[num] = ret.wordStr
+                    let data = []
+                    for (let i in wordStr) {
+                        data.push(wordStr[i])
+                    }
+                    $api.html($api.byId('content-ASR'), data);
+                }
+            }
+
+            if (ret.eventType == 'record_end' || ret.eventType == 'recognize_end') {
+                console.log('结束');
+                recordFn()
+            } else if (ret.eventType == 'recognize_start') {
+            }
+        });
+    }
+
+
+    /* 取消语音识别 */
+    function stopRecordFn() {
+        iflyRecognition.pauseRead();
+        iflyRecognition.stopRead();
+        iflyRecognition.stopRecord();
+        iflyRecognition.cancelRecord();
+
+        let score = 0
+        let text = trimSpecial(`N5一个探索生命自然健康美的品牌。以能量·代谢·循环·净化·新生5大自然生命元素为研发理念,依托国际先进前沿细胞科技.结合东西方医学自然疗法，为亚健康人群提供高品质身心维养。
+N5四季和养/持品牌自然康美理念融中医养身精髓、循四季养、和体质调,让身体与自然相和，回归至善的健康状态。`)
+        let scoreTemplate = $('#content-ASR').html()
+        for (let j = 0; j < scoreTemplate.length; j++) {
+            if (text.indexOf(scoreTemplate[j]) != -1) {
+                score += 0.8
+            } else {
+                // console.log(scoreTemplate[j]);
+            }
+        }
+        score = score.toFixed(2) > 100 ? 100 : score.toFixed(2)
+        $('#title1').css('display', 'none')
+        $('#title2').css('display', 'flex')
+        $('#score').css('display', 'flex')
+        $('#content-ASR').css('height', 'calc(100% - 84px - 100px - 118px)')
+        $('#score-ASR').html(score)
+        $('#content-btn').css('display', 'none')
+        $('#content-btn2').css('display', 'block')
+    }
+
+    /* 判断字符是否是特殊符号 */
+    function hasSpecialStr(str) {
+        var specialChars = "~·`!！@#$￥%^…&*()（）—-_=+[]{}【】、|\\;:；：'\"“‘,./<>《》?？，。";
+        var len = specialChars.length;
+        for (var i = 0; i < len; i++) {
+            if (str[0].indexOf(specialChars.substring(i, i + 1)) != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /* 替换字符串中的所有特殊字符（包含空格） */
+    function trimSpecial(string) {
+        if (string != "") {
+            const pattern = /[`~!@#$^\-&*()=|{}':;',\\\[\]\.<>\/?~！@#￥……&*（）——|{}【】'；：""'。，、？\s·]/g;
+            string = string.replace(pattern, "");
+        }
+        return string
+    }
+</script>
+
+</html>

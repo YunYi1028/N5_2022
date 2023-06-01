@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/tds.css">
+    <style media="screen">
+        .content-1 {
+            left: 50%;
+            top: 19.64%;
+            width: 53.5%;
+            height: 7%;
+        }
+
+        .content-1-search {
+            flex: 1;
+            height: 100%;
+            border-radius: 14.25px;
+            padding: 2px 12px 0 65px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            font-size: 14px;
+        }
+
+        .content-1-search::placeholder {
+            color: #cccccc;
+        }
+
+        .content-1-search-icon {
+            width: 11%;
+            height: 100%;
+        }
+
+        .content-2 {
+            left: 50%;
+            top: 51.5%;
+            width: 41%;
+            height: 50%;
+        }
+
+        .content-2-user-wrapper {
+            width: 100%;
+            height: calc(100% - 8%);
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        .user-list-title-img {
+            margin-bottom: 10px;
+        }
+
+        .content-2-user-content {
+            width: calc(100% - 4px);
+            height: 27px;
+            border: 2px solid rgb(255, 255, 255, 0.3);
+            border-radius: 7px;
+            background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: #cccccc31 0px 0px 30px inset;
+            margin-bottom: 12px;
+            justify-content: flex-start;
+        }
+
+        .content-2-user-text {
+            font-size: 12px;
+            color: #212121;
+            height: 100%;
+            border-right: 1px solid rgba(158, 158, 158, 0.3);
+        }
+
+        .content-2-user-text1 {
+            width: 20%;
+        }
+
+        .content-2-user-text2 {
+            width: 14.5%;
+        }
+
+        .content-2-user-text3 {
+            width: 34.2%;
+        }
+
+        .content-2-user-text4 {
+            flex: 1;
+            border-right: none;
+        }
+    </style>
+
+    <!-- style适配meta10 -->
+    <style>
+        @media screen and (max-width: 1000px) {
+            .content-1 {
+                top: 18.2%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- logo -->
+        <div class="logo">
+            <img src="../image/index_logo.png" alt="">
+        </div>
+
+        <!-- 背景 -->
+        <img src="../image/index3/index3-2/bg.png" alt="" class="bg">
+
+        <!-- content -->
+        <div class="content-wrapper">
+            <!-- 搜索框 -->
+            <div class="content content-1 flex">
+                <input id="selectKey" class="content-1-search" type="text" placeholder="请输入客户电话查询">
+                <div class="content-1-search-icon" onclick="selectByselectKey()"></div>
+            </div>
+            <!-- 用户列表 -->
+            <div class="content content-2">
+                <img src="../image/index3/index3-2/title.png" alt="" class="user-list-title-img">
+                <div class="content-2-user-wrapper" id="user-wrapper">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 点击背景音乐 -->
+        <!-- <div id="bgm">
+            <audio id="click" src="../res/click.wav"></audio>
+        </div> -->
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script src="../script/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+    // 是否是index4选择用户
+    let selectUser = false
+
+    apiready = function () {
+        api.parseTapmode();
+        // tds.js 函数
+        tabCreate(2, 'frame')
+
+        if (api.pageParam.selectuser) {
+            selectUser = true
+        }
+
+        client_listFn()
+        api.addEventListener({
+            name: 'update_profile'
+        }, function (ret) {
+            client_listFn()
+        })
+    }
+
+    /* 顾客列表搜索 */
+    function selectByselectKey() {
+        loding('show')
+        let params = { keyword: $api.val($api.byId('selectKey')) }
+        client_list(params).then(e => {
+            // console.log(JSON.stringify(e));
+            let data = e.data.reverse()
+            let str = ''
+            for (let i of data) {
+                let sex = i.gender == 0 ? '女' : '男'
+                str += `<div class="content-2-user-content flex" onclick="selectUserFn('${JSON.stringify(i).replace(/"/g, '&quot;')}','${selectUser}')">
+                            <div class="content-2-user-text content-2-user-text1 flex">${i.nickname}</div>
+                            <div class="content-2-user-text content-2-user-text2 flex">${sex}</div>
+                            <div class="content-2-user-text content-2-user-text3 flex">${i.mobile}</div>
+                            <div class="content-2-user-text content-2-user-text4 flex">${i.birthday}</div>
+                        </div>`
+            }
+            $api.html($api.byId('user-wrapper'), str)
+        }).catch(() => { }).finally(() => { loding('hide') })
+    }
+
+    /* 顾客列表 */
+    function client_listFn() {
+        loding('show')
+        client_list().then(e => {
+            let data = e.data.reverse()
+            // console.log(JSON.stringify(data));
+            let str = ''
+            for (let i of data) {
+                let sex = i.gender == 0 ? '女' : '男'
+                str += `<div class="content-2-user-content flex" onclick="selectUserFn('${JSON.stringify(i).replace(/"/g, '&quot;')}','${selectUser}')">
+                            <div class="content-2-user-text content-2-user-text1 flex">${i.nickname}</div>
+                            <div class="content-2-user-text content-2-user-text2 flex">${sex}</div>
+                            <div class="content-2-user-text content-2-user-text3 flex">${i.mobile}</div>
+                            <div class="content-2-user-text content-2-user-text4 flex">${i.createtime.substring(0, 10)}</div>
+                        </div>`
+            }
+            $api.html($api.byId('user-wrapper'), str)
+        }).catch(() => { }).finally(() => { loding('hide') })
+    }
+
+    /* 顾客选择 */
+    function selectUserFn(data) {
+        $api.setStorage('user_info', data)
+        if (selectUser) {
+            api.closeFrame()
+            /* 选择用户 => index4 */
+            api.sendEvent({
+                name: 'selectUser'
+            })
+        } else {
+            set_tabBar('index3-6', 'notab', '', 'reload', '')
+        }
+    }
+
+    //软键盘事件
+    $api.addEvt($api.byId('selectKey'), 'keypress', function (e) {
+        if (e.keyCode == 13) {
+            selectByselectKey()
+        }
+    });
+</script>
+
+</html>

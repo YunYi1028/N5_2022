@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<link rel="stylesheet" href="../css/swiper-bundle.min.css">
+	<style media="screen">
+		.bg {
+			position: absolute;
+			transform: translateX(-50%) translateY(-50%);
+			top: 50%;
+			left: 50%;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.swiper {
+			width: 85.5%;
+			height: auto;
+			position: absolute;
+			transform: translateX(-50%) translateY(-50%);
+			top: 47%;
+			left: 50.6%;
+			padding-top: 110px;
+		}
+
+		.swiper-slide {
+			background-position: center;
+			background-size: contain;
+			background-repeat: no-repeat;
+			height: 60vh;
+			overflow: hidden;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="page">
+		<!-- logo -->
+		<div class="logo">
+			<img src="../image/index_logo.png" alt="">
+		</div>
+
+		<div class="content-wrapper">
+			<img src="../image/index0/bg.jpg" alt="" class="bg">
+			<div class="swiper mySwiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" style="background-image:url(../image/index0/banner1.png)" tapmode
+						onclick="toast('暂无更多内容')">
+					</div>
+					<div class="swiper-slide" style="background-image:url(../image/index0/banner2.png)" tapmode
+						onclick="set_tabBar('index0d2','notab',{notab:'notab'})">
+					</div>
+					<div class="swiper-slide" style="background-image:url(../image/index0/banner3.png)" tapmode
+						onclick="set_tabBar('index0d3','notab',{notab:'notab'})">
+					</div>
+					<!-- <div class="swiper-slide" style="background-image:url(../image/index0/banner4.png)" tapmode
+						onclick="set_tabBar('index0d4','notab',{notab:'notab'})">
+					</div> -->
+				</div>
+			</div>
+		</div>
+
+		<!-- <div id="bgm">
+			<audio id="click" src="../res/click.wav"></audio>
+		</div> -->
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/anime.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script type="text/javascript" src="../script/base.js"></script>
+<script src="../script/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+	apiready = function () {
+		api.parseTapmode();
+		// tds.js 函数
+		tabCreate(1, 'frame')
+	}
+
+	// var swiper = new Swiper(".mySwiper", {
+	// 	// grabCursor: true,
+	// 	initialSlide: 1,
+	// 	effect: "creative",
+	// 	creativeEffect: {
+	// 		prev: {
+	// 			shadow: false,
+	// 			translate: ["-47%", 0, -400],
+	// 			// rotate: [0, -33, 0],
+	// 			opacity: 0.7,
+	// 		},
+	// 		next: {
+	// 			translate: ["47%", 0, -400],
+	// 			// rotate: [0, 33, 0],
+	// 			opacity: 0.7,
+	// 		},
+	// 		progressMultiplier: 1,
+	// 		perspective: true,
+	// 		limitProgress: 3,
+	// 	},
+	// 	// loop:true,
+	// });
+
+	let touchData = {
+		flag: false,
+	}
+	var swiper = new Swiper(".mySwiper", {
+		effect: 'coverflow', // slide的切换效果
+		slidesPerView: 2.5, // slider容器能够同时显示的slides数量
+		initialSlide: 4, // 设定初始化时slide的索引
+		centeredSlides: true, // 居中幻灯片
+		loop: true,
+		coverflowEffect: {
+			rotate: 50, // slide做3d旋转时Y轴的旋转角度
+			stretch: '2%', // 每个slide之间的拉伸值，越大slide靠得越紧。5.3.6 后可使用%百分比
+			depth: 120, // slide的位置深度。值越大z轴距离越远，看起来越小。
+			modifier: 1, // depth和rotate和stretch的倍率，相当于depth*modifier、rotate*modifier、stretch*modifier，值越大这三个参数的效果越明显。
+			slideShadows: false // 是否开启slide阴影
+		},
+		on: {
+			/*  */
+			click: function () {
+				touchData.flag = true
+			},
+			/* 当碰触到slider时执行 */
+			touchStart: function () {
+				$api.dom(".swiper-slide-active").style.transition = "0.15s all";
+				$api.dom(".swiper-slide-active").style.transform = "scale(1.3) translateY(-10%)";
+			},
+			/* 触摸释放时执行 */
+			touchEnd: function () {
+				setTimeout(() => {
+					$api.dom(".swiper-slide-active").style.transition = "0.15s all";
+					$api.dom(".swiper-slide-active").style.transform = "scale(1.3) translateY(-10%)";
+				}, 300)
+				setTimeout(() => {
+					if (touchData.flag) {
+						touchData.flag = false
+					} else {
+						$api.dom(".swiper-slide-prev").style.transition = "0.25s all";
+						$api.dom(".swiper-slide-next").style.transition = "0.25s all";
+						$api.dom(".swiper-slide-prev").style.transform = "translateX(-3.9%)" + $api.dom(".swiper-slide-prev").style.transform;
+						$api.dom(".swiper-slide-next").style.transform = "translateX(-0.8%)" + $api.dom(".swiper-slide-next").style.transform;
+					}
+				}, 350)
+			},
+		}
+	});
+	setTimeout(() => {
+		$api.dom(".swiper-slide-active").style.transform = "scale(1.3) translateY(-10%)";
+		$api.dom(".swiper-slide-prev").style.transition = "0.25s all";
+		$api.dom(".swiper-slide-next").style.transition = "0.25s all";
+		$api.dom(".swiper-slide-prev").style.transform = "translateX(-3.9%)" + $api.dom(".swiper-slide-prev").style.transform;
+		$api.dom(".swiper-slide-next").style.transform = "translateX(-0.8%)" + $api.dom(".swiper-slide-next").style.transform;
+	}, 100)
+
+</script>
+
+</html>

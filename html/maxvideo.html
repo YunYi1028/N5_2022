@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<style media="screen">
+		body {
+			margin: 0;
+			background-color: transparent;
+		}
+
+		.closebtn {
+			position: absolute;
+			right: 80px;
+			top: 60px;
+		}
+
+		.index0d2-wrapper {
+			position: absolute;
+			transform: translateX(-50%) translateY(-50%);
+			left: 50.5%;
+			top: 51.2%;
+			width: 15%;
+			height: 63.5%;
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- logo -->
+	<div class="logo">
+		<img src="../image/index_logo.png" alt="">
+	</div>
+	<video src="" class="bg" id="bg" autoplay loop muted preload></video>
+	<!-- <img src="../image/1.jpg" alt="" class="bg" id="expert"> -->
+	<!-- <div class="closebtn">
+		<img src="../image/icon/closebtn.png" class="key" tapmode onclick="closeFrame()">
+	</div>
+	<div id="bgm">
+		<audio id="click" src="../res/click.wav"></audio>
+	</div> -->
+	<div class="index0d2-wrapper" onclick="set_tabBar('index2', 'notab', null,null, 2)"></div>
+	<div class="clearfix"></div>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/anime.js"></script>
+	<script type="text/javascript" src="../script/tds1.0.js"></script>
+	<script type="text/javascript" src="../script/ajax.js"></script>
+	<script type="text/javascript">
+		apiready = function () {
+			api.parseTapmode();
+
+			// tds.js 函数
+			tabCreate(0, 'frame')
+
+			$api.byId('bg').src = "../res/" + api.pageParam.src;
+
+			if (api.pageParam.src == 'index0/index0d2.mp4') {
+				$api.css($api.dom('.index0d2-wrapper'), "display:block")
+			}
+		}
+
+		/* tabCreate关闭按钮fn */
+		function closeFn() {
+			closeFrame()
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+    <style media="screen">
+        .page {
+            background-color: #fff;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .slide-inner {
+            width: 100%;
+            height: 100%;
+        }
+
+        .content {
+            left: 9%;
+            top: 68.5%;
+            width: 9%;
+            height: 15%;
+            z-index: 2;
+        }
+
+        .content-2 {
+            left: 21%;
+        }
+
+        .content-3 {
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+        }
+
+        .slide1-video {
+            opacity: 0;
+            transition: 0.5s all;
+        }
+
+        #slide1-video-bg {
+            opacity: 1;
+        }
+
+        .text-wrapper {
+            position: fixed;
+            left: 5%;
+            top: 21.5%;
+        }
+
+        .text-wrapper * {
+            width: 100%;
+            color: #fff;
+            text-align: right;
+        }
+
+        .text-wrapper .text1 {
+            font-size: 14px;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .text-wrapper .text1 span {
+            color: rgba(255, 255, 255, 0.35);
+            margin-left: 5px;
+        }
+
+        .text-wrapper .text2 {
+            font-size: 18px;
+        }
+
+        .slide4-video-content {
+            width: 35%;
+            height: 63.5%;
+            transform: translateX(-50%) translateY(-50%);
+            left: 77.5%;
+            top: 51.8%;
+            opacity: 0;
+            transition: 0.5s all;
+        }
+
+        #slide4-video-in {
+            opacity: 1;
+        }
+
+        .slide4-btn-wrapper {
+            position: fixed;
+            left: 49%;
+            top: 31%;
+            width: 12%;
+            height: 45%;
+            overflow: hidden;
+        }
+
+        .slide4-btn {
+            width: 100%;
+        }
+
+        .slide4-btn .text {
+            flex: 1;
+            font-size: 12px;
+            font-weight: 800;
+            justify-content: flex-start;
+        }
+
+        .slide4-btn .img {
+            width: 18px;
+        }
+
+        .slide4-btn2 {
+            margin-top: 26px;
+        }
+
+        .slide4-btn3 {
+            margin-top: 24px;
+        }
+
+        .slide4-btn4 {
+            margin-top: 42px;
+        }
+
+        .slide4-btn5 {
+            margin-top: 29px;
+        }
+
+        .slide4-btn6 {
+            margin-top: 30px;
+        }
+
+        #slide4-video-dynamic {
+            transition: 0.5s all;
+        }
+
+        .slide5-btn-wrapper {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide5-btn {
+            position: fixed;
+            transform: translateX(-50%) translateY(-50%);
+            background-color: transparent;
+        }
+
+        .slide5-btn1 {
+            width: 33%;
+            height: 64%;
+            left: 16%;
+            top: 64%;
+            z-index: 2;
+        }
+
+        .slide5-btn2 {
+            width: 26%;
+            height: 90%;
+            left: 83%;
+            top: 54%;
+            z-index: 2;
+        }
+
+        .slide5-btn3 {
+            width: 100%;
+            height: 100%;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+        }
+
+        .slide5-video-content {
+            opacity: 0;
+            transition: 0.5s all;
+        }
+
+        .video-wrapper {
+            visibility: hidden;
+            transition: 0.5s all;
+        }
+
+        .slide6-btn-wrapper {
+            position: fixed;
+            transform: translateX(-50%) translateY(-50%);
+            left: 50.5%;
+            top: 54%;
+            width: 71%;
+            height: 64%;
+        }
+
+        .slide6-btn-wrapper-swiper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide6-btn-wrapper-swiper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .slide6-btn-wrapper-swiper-pagination {
+            position: fixed;
+            transform: translateX(-50%);
+            left: 50% !important;
+            bottom: -4% !important;
+        }
+    </style>
+
+    <!-- style适配meta10 -->
+    <style>
+        @media screen and (max-width: 1000px) {
+            .text-wrapper {
+                left: 5%;
+                top: 20%;
+            }
+
+            .text-wrapper .text1 {
+                font-size: 13px;
+            }
+
+            .text-wrapper .text2 {
+                font-size: 17px;
+            }
+
+            .slide4-btn-wrapper {
+                left: 48.4%;
+            }
+
+            .slide4-video-content {
+                height: 66%;
+                left: 76.9%;
+                top: 52%;
+            }
+
+            .slide6-btn-wrapper {
+                left: 51%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- logo -->
+        <div class="logo">
+            <img src="../image/index_logo.png" alt="">
+        </div>
+
+        <!-- swiper -->
+        <div class="swiper">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide swiper-slide1">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-2/slide1-bg.jpg" alt="" class="bg" id="slide1-video-bg-img">
+                        <div class="video-wrapper">
+                            <!-- <video src="../res/index2/index2-2/slide1-bg.mp4" loop muted class="bg slide1-video"
+                                id="slide1-video-bg"></video>
+                            <video src="../res/index2/index2-2/slide1-1.mp4" loop muted class="bg slide1-video"
+                                id="slide1-video-1"></video>
+                            <video src="../res/index2/index2-2/slide1-2.mp4" loop muted class="bg slide1-video"
+                                id="slide1-video-2"></video> -->
+                        </div>
+
+                        <div class="text-wrapper flex-d" id="text-wrapper">
+                            <div class="text1"></div>
+                            <div class="text2"></div>
+                        </div>
+
+                        <div class="slide1-btn-wrapper">
+                            <div class="content content-1" onclick="slide1Btn(1)"></div>
+                            <div class="content content-2" onclick="slide1Btn(2)"></div>
+                            <div class="content content-3" onclick="slide1Btn('bg')"></div>
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide2">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-2/slide2-bg.jpg" alt="" class="bg" id="slide2-video-bg-img">
+                        <div class="video-wrapper">
+                            <!-- <video src="../res/index2/index2-2/slide2-bg.mp4" autoplay loop muted class="bg slide2-video"
+                                id="slide2-video-bg"></video> -->
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide3">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-2/slide3-bg.jpg" alt="" class="bg" id="slide3-video-bg-img">
+                        <div class="video-wrapper">
+                            <!-- <video src="../res/index2/index2-2/slide3-bg.mp4" loop muted class="bg slide3-video"
+                                id="slide3-video-bg"></video> -->
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide4">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-2/slide4-bg.jpg" alt="" class="bg" id="slide4-video-bg-img">
+                        <div class="video-wrapper">
+                            <!-- <video src="../res/index2/index2-2/slide4-bg.mp4" autoplay loop muted class="bg slide4-video"
+                                id="slide4-video-bg"></video>
+                            <video src="../res/index2/index2-2/slide4-1.mp4" autoplay loop muted
+                                class="bg slide4-video slide4-video-content" id="slide4-video-1"></video>
+                            <video src="../res/index2/index2-2/slide4-1-in.mp4" autoplay muted
+                                class="bg slide4-video slide4-video-content" id="slide4-video-in"></video>
+
+                            <video src="../res/index2/index2-2/slide4-2.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic1"></video>
+                            <video src="../res/index2/index2-2/slide4-3.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic2"></video>
+                            <video src="../res/index2/index2-2/slide4-4.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic3"></video>
+                            <video src="../res/index2/index2-2/slide4-5.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic4"></video>
+                            <video src="../res/index2/index2-2/slide4-6.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic5"></video>
+                            <video src="../res/index2/index2-2/slide4-7.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic6"></video> -->
+                        </div>
+
+
+                        <div class="slide4-btn-wrapper">
+                            <div class="slide4-btn slide4-btn1 flex" onclick="slide4Btn(1)">
+                                <div class="text flex">手太阴肺经</div>
+                                <div class="img flex">
+                                    <img src="../image/index2/index2-2/slide4_off.png" alt="" id="slide4Img1" class="slide4Img">
+                                </div>
+                            </div>
+                            <div class="slide4-btn slide4-btn2 flex" onclick="slide4Btn(2)">
+                                <div class="text flex">手厥阴心包经</div>
+                                <div class="img flex">
+                                    <img src="../image/index2/index2-2/slide4_off.png" alt="" id="slide4Img2" class="slide4Img">
+                                </div>
+                            </div>
+                            <div class="slide4-btn slide4-btn3 flex" onclick="slide4Btn(3)">
+                                <div class="text flex">手少阴心经</div>
+                                <div class="img flex">
+                                    <img src="../image/index2/index2-2/slide4_off.png" alt="" id="slide4Img3" class="slide4Img">
+                                </div>
+                            </div>
+                            <div class="slide4-btn slide4-btn4 flex" onclick="slide4Btn(4)">
+                                <div class="text flex">手阳明大肠经</div>
+                                <div class="img flex">
+                                    <img src="../image/index2/index2-2/slide4_off.png" alt="" id="slide4Img4" class="slide4Img">
+                                </div>
+                            </div>
+                            <div class="slide4-btn slide4-btn5 flex" onclick="slide4Btn(5)">
+                                <div class="text flex">手少阳三焦经</div>
+                                <div class="img flex">
+                                    <img src="../image/index2/index2-2/slide4_off.png" alt="" id="slide4Img5" class="slide4Img">
+                                </div>
+                            </div>
+                            <div class="slide4-btn slide4-btn6 flex" onclick="slide4Btn(6)">
+                                <div class="text flex">手太阳小肠经</div>
+                                <div class="img flex">
+                                    <img src="../image/index2/index2-2/slide4_off.png" alt="" id="slide4Img6" class="slide4Img">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide5">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-2/slide5-bg.jpg" alt="" class="bg">
+                        <div class="video-wrapper">
+                            <!-- <video src="../res/index2/index2-2/slide5-bg.mp4" autoplay loop muted class="bg slide5-video"
+                                id="slide5-video-bg"></video>
+                            <video src="../res/index2/index2-2/slide5-1.mp4" autoplay loop muted
+                                class="bg slide5-video slide5-video-content" id="slide5-video-1"></video>
+                            <video src="../res/index2/index2-2/slide5-2.mp4" autoplay loop muted
+                                class="bg slide5-video slide5-video-content" id="slide5-video-2"></video> -->
+                        </div>
+
+                        <div class="slide5-btn-wrapper">
+                            <div class="slide5-btn slide5-btn1 flex" onclick="slide5Btn(1)"></div>
+                            <div class="slide5-btn slide5-btn2 flex" onclick="slide5Btn(2)"></div>
+                            <div class="slide5-btn slide5-btn3 flex" onclick="slide5Btn('bg')"></div>
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrowpre">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide6">
+                    <div class="slide-inner">
+                        <img src="../image/index2/index2-2/slide6-bg.jpg" alt="" class="bg" id="slide6-video-bg-img">
+
+                        <div class="video-wrapper">
+                        </div>
+
+                        <div class="slide6-btn-wrapper flex-d">
+
+                            <div class="slide6-btn-wrapper-swiper">
+                                <div class="swiper-wrapper">
+
+                                    <div class="swiper-slide swiper-slide1">
+                                        <div class="slide-inner flex">
+                                            <img src="../image/index2/index2-2/slide6-1-content.png" alt="" class="">
+                                        </div>
+                                    </div>
+
+                                    <div class="swiper-slide swiper-slide1">
+                                        <div class="slide-inner flex">
+                                            <img src="../image/index2/index2-2/slide6-2-content.png" alt="" class="">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="slide6-btn-wrapper-swiper-pagination flex"></div>
+                            </div>
+
+                        </div>
+
+                        <img src="../image/icon/arrow.gif" alt="" class="arrowpre">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 点击背景音乐 -->
+        <!-- <div id="bgm">
+            <audio id="click" src="../res/click.wav"></audio>
+        </div> -->
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js" language="javascript" charset="UTF-8"></script>
+<script src="../script/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+    apiready = function () {
+        api.parseTapmode();
+        // tds.js 函数
+        tabCreate(2, 'win')
+
+        setTimeout(() => {
+            let logo = $api.dom('.logo')
+            $api.css(logo, "top:-20%;opacity:0")
+        }, 200);
+
+        strFn()
+    }
+
+    /* 播放对应视频[传入需要渲染的index] */
+    // 仿照抖音动态渲染video，多个video占用性能高，旧版平板性能不够
+    let videoWrapper = $api.domAll('.video-wrapper')
+    let activeIndex = ''
+    function playCorrespondingVideo(activeIndex) {
+        let str0 = `<video src="../res/index2/index2-2/slide1-bg.mp4" autoplay loop muted class="bg slide1-video"
+                                id="slide1-video-bg"></video>
+                            <video src="../res/index2/index2-2/slide1-1.mp4" autoplay loop muted class="bg slide1-video"
+                                id="slide1-video-1"></video>
+                            <video src="../res/index2/index2-2/slide1-2.mp4" autoplay loop muted class="bg slide1-video"
+                                id="slide1-video-2"></video>`
+        let str1 = `<video src="../res/index2/index2-2/slide2-bg.mp4" autoplay loop muted class="bg slide2-video"
+                                id="slide2-video-bg"></video>`
+        let str2 = `<video src="../res/index2/index2-2/slide3-bg.mp4" autoplay loop muted class="bg slide3-video"
+                                id="slide3-video-bg"></video>`
+        let str3 = `<video src="../res/index2/index2-2/slide4-bg.mp4" autoplay loop muted class="bg slide4-video"
+                                id="slide4-video-bg"></video>
+                            <video src="../res/index2/index2-2/slide4-1.mp4" autoplay loop muted
+                                class="bg slide4-video slide4-video-content" id="slide4-video-1"></video>
+                            <video src="../res/index2/index2-2/slide4-1-in.mp4" autoplay muted
+                                class="bg slide4-video slide4-video-content" id="slide4-video-in"></video>
+
+                            <video src="../res/index2/index2-2/slide4-2.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic1"></video>
+                            <video src="../res/index2/index2-2/slide4-3.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic2"></video>
+                            <video src="../res/index2/index2-2/slide4-4.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic3"></video>
+                            <video src="../res/index2/index2-2/slide4-5.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic4"></video>
+                            <video src="../res/index2/index2-2/slide4-6.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic5"></video>
+                            <video src="../res/index2/index2-2/slide4-7.mp4" loop muted
+                                class="bg slide4-video slide4-video-content slide4-video-dynamic"
+                                id="slide4-video-dynamic6"></video>`
+        let str4 = `<video src="../res/index2/index2-2/slide5-bg.mp4" autoplay loop muted class="bg slide5-video"
+                                id="slide5-video-bg"></video>
+                            <video src="../res/index2/index2-2/slide5-1.mp4" autoplay loop muted
+                                class="bg slide5-video slide5-video-content" id="slide5-video-1"></video>
+                            <video src="../res/index2/index2-2/slide5-2.mp4" autoplay loop muted
+                                class="bg slide5-video slide5-video-content" id="slide5-video-2"></video>`
+        let str5 = `<video src="../res/index2/index2-2/slide6-bg.mp4" autoplay loop muted class="bg slide6-video"
+                                id="slide6-video-bg"></video> `
+        let videoHtml = [str0, str1, str2, str3, str4, str5]
+
+        for (let i = 0; i < videoWrapper.length; i++) {
+            if (i == activeIndex) {
+                $api.html(videoWrapper[i], videoHtml[activeIndex])
+                $api.css(videoWrapper[i], 'visibility:visible')
+                if (i == 0) {
+                    $api.css($api.dom('.logo'), "top:-20%;opacity:0")
+                } else if (i == 1) {
+                    $api.css($api.dom('.logo'), "top:-1%;opacity:1")
+                } else if (i == 3) {
+                    let slide4VidIn = $api.byId('slide4-video-in')
+                    let slide4Vid = $api.byId('slide4-video-1')
+                    slide4VidIn.addEventListener('ended', function () {
+                        $api.css(slide4VidIn, 'opacity:0')
+                        $api.css(slide4Vid, 'opacity:1')
+                        slide4Vid.play()
+                    });
+                }
+            } else {
+                slide4Btn(-1)
+                $api.html(videoWrapper[i], '')
+                $api.css(videoWrapper[i], 'visibility:hidden;')
+            }
+        }
+    }
+
+    /* swiper参数 */
+    let swiperOptions = {
+        speed: 750, // 单页的滑动过渡消耗时间
+        direction: 'vertical', // 水平方向切换 horizontal 或垂直方向切换 vertical
+        on: {
+            /* swiper初始化 */
+            init: function (swiper) {
+                activeIndex = this.activeIndex
+                playCorrespondingVideo(activeIndex)
+            },
+            /* swiper从当前slide开始过渡到另一个slide时执行 */
+            slideChangeTransitionStart: function () {
+                activeIndex = this.activeIndex
+                playCorrespondingVideo(activeIndex)
+            },
+            /* 触摸释放时执行 */
+            touchEnd: function () {
+                if (this.isEnd && this.touches.currentY < this.touches.startY) {
+                    toast('滑到头啦')
+                }
+            }
+        },
+    }
+    let swiper = new Swiper('.swiper', swiperOptions)
+    function strFn() {
+        let time = getNowFormatDate('cn', ['年', '月', '日'])
+        let judge = judgeFn()
+        let judgeEn = ''
+        let judgeEnData = [
+            { name: "立春", key: "Spring begins" },
+            { name: "雨水", key: "The rains" },
+            { name: "惊蛰", key: "Insects awaken" },
+            { name: "春分", key: "Vernal Equinox" },
+            { name: "清明", key: "Clear and bright" },
+            { name: "谷雨", key: "Grain rain" },
+            { name: "立夏", key: "Summer begins" },
+            { name: "小满", key: "Grain buds" },
+            { name: "芒种", key: "Grain in ear" },
+            { name: "夏至", key: "Summer solstice" },
+            { name: "小暑", key: "Slight heat" },
+            { name: "大暑", key: "Great heat" },
+            { name: "立秋", key: "Autumn begins" },
+            { name: "处暑", key: "Stopping the heat" },
+            { name: "白露", key: "White dews" },
+            { name: "秋分", key: "Autumn Equinox" },
+            { name: "寒露", key: "Cold dews" },
+            { name: "霜降", key: "Hoar-frost falls" },
+            { name: "立冬", key: "Winter begins" },
+            { name: "小雪", key: "Light snow" },
+            { name: "大雪", key: "Heavy snow" },
+            { name: "冬至", key: "Winter Solstice" },
+            { name: "小寒", key: "Slight cold" },
+            { name: "大寒", key: "Great cold" },
+            { name: "冬季", key: "Winter" },
+            { name: "春季", key: "Spring" },
+            { name: "夏季", key: "Summer" },
+            { name: "秋季", key: "Autumn" },]
+
+        for (let i in judgeEnData) {
+            if (judge == judgeEnData[i].name) {
+                judgeEn = judgeEnData[i].key
+                break
+            }
+        }
+
+        let str =
+            `
+                <div class="text1">今天是<span>/ TODAY</span></div>
+                <div class="text2">${time}·${judge}</div> 
+                `
+        $api.html($api.byId('text-wrapper'), str)
+    }
+
+    /* 获取当天二十四节气，如果当天不属于节气返回季节 */
+    function judgeFn() {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        let judge = getjq(year, month, strDate)
+
+        return judge
+    }
+
+    /* 二十四节气算法(年,月,日) */
+    function getjq(yyyy, mm, dd) {
+        mm = mm - 1;
+        let sTermInfo = new Array(0, 21208, 42467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758);
+        let solarTerm = new Array("小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至");
+        let solarTerms = "";
+        //　　此方法是获取该日期是否为某节气
+        let tmp1 = new Date((31556925974.7 * (yyyy - 1900) + sTermInfo[mm * 2 + 1] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+        let tmp2 = tmp1.getUTCDate();
+        if (tmp2 == dd)
+            solarTerms = solarTerm[mm * 2 + 1];
+        tmp1 = new Date((31556925974.7 * (yyyy - 1900) + sTermInfo[mm * 2] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+        tmp2 = tmp1.getUTCDate();
+        if (tmp2 == dd)
+            solarTerms = solarTerm[mm * 2];
+        if (yyyy == '2022' && mm == '08' && dd == '07') {
+            solarTerms = '白露'
+        } else if (yyyy == '2022' && mm == '08' && dd == '08') {
+            solarTerms = ''
+        }
+
+        //　　此方法可以获取该日期处于某节气
+        while (solarTerms == "") {
+            let tmp1 = new Date((31556925974.7 * (yyyy - 1900) + sTermInfo[mm * 2 + 1] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+            let tmp2 = tmp1.getUTCDate();
+            if (tmp2 == dd) solarTerms = solarTerm[mm * 2 + 1];
+            tmp1 = new Date((31556925974.7 * (yyyy - 1900) + sTermInfo[mm * 2] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+            tmp2 = tmp1.getUTCDate(); if (tmp2 == dd) solarTerms = solarTerm[mm * 2];
+            if (dd > 1) {
+                dd = dd - 1;
+            } else {
+                mm = mm - 1;
+                if (mm < 0) {
+                    yyyy = yyyy - 1; mm = 11;
+                }
+                dd = 31;
+            }
+            if (solarTerms == '立春' || solarTerms == '雨水' || solarTerms == '惊蛰' || solarTerms == '春分' || solarTerms == '清明' || solarTerms == '谷雨') {
+                solarTerms = '春季'
+            } else if (solarTerms == '立夏' || solarTerms == '小满' || solarTerms == '芒种' || solarTerms == '夏至' || solarTerms == '小暑' || solarTerms == '大暑') {
+                solarTerms = '夏季'
+            } else if (solarTerms == '立秋' || solarTerms == '处暑' || solarTerms == '白露' || solarTerms == '秋分' || solarTerms == '寒露' || solarTerms == '寒露') {
+                solarTerms = '秋季'
+            } else if (solarTerms == '立冬' || solarTerms == '小雪' || solarTerms == '大雪' || solarTerms == '冬至' || solarTerms == '小寒' || solarTerms == '大寒') {
+                solarTerms = '冬季'
+            }
+        }
+
+        return solarTerms;
+    }
+
+    /* slide1按钮 */
+    function slide1Btn(id) {
+        /* slide1视频选择播放 */
+        let videoAll = $api.domAll('.slide1-video')
+        let video = $api.byId('slide1-video-' + id)
+        for (let i = 0; i < videoAll.length; i++) {
+            $api.css(videoAll[i], 'opacity:0;');
+        }
+        $api.css(video, 'opacity:1;');
+    }
+
+    /* slide4按钮 */
+    function slide4Btn(id) {
+        let img = ''
+        let imgAll = $api.domAll('.slide4Img')
+        let slide4VidIn = $api.byId('slide4-video-in')
+        let slide4Vid = $api.byId('slide4-video-1')
+        let vidDynamicAll = $api.domAll('.slide4-video-dynamic')
+
+        for (let i = 0; i < imgAll.length; i++) {
+            $api.attr(imgAll[i], 'src', '../image/index2/index2-2/slide4_off.png')
+        }
+        if (id == -1) {
+            for (let i = 0; i < vidDynamicAll.length; i++) {
+                $api.css(vidDynamicAll[i], 'opacity:0')
+            }
+        } else {
+            let vidDynamic = $api.byId('slide4-video-dynamic' + id)
+            img = $api.byId('slide4Img' + id)
+            $api.attr(img, 'src', '../image/index2/index2-2/slide4_on.png')
+            for (let i = 0; i < vidDynamicAll.length; i++) {
+                $api.css(vidDynamicAll[i], 'opacity:0')
+            }
+            $api.css(slide4VidIn, 'opacity:0')
+            $api.css(slide4Vid, 'opacity:0')
+            $api.css(vidDynamic, 'opacity:1')
+            vidDynamic.play()
+        }
+
+    }
+
+    /* slide5按钮 */
+    function slide5Btn(id) {
+        let vid = $api.byId('slide5-video-' + id)
+        let vidll = $api.domAll('.slide5-video-content')
+        for (let i = 0; i < vidll.length; i++) {
+            $api.css(vidll[i], 'opacity:0')
+        }
+        $api.css(vid, 'opacity:1')
+    }
+
+    /* swiper参数 */
+    let slide6BtnWrapperSwiper_swiperOptions = {
+        speed: 750, // 单页的滑动过渡消耗时间
+        direction: 'horizontal', // 水平方向切换 horizontal 或垂直方向切换 vertical
+        spaceBetween: 30,
+        pagination: {
+            el: '.slide6-btn-wrapper-swiper-pagination'
+        },
+    }
+    let slide6BtnWrapperSwiper = new Swiper('.slide6-btn-wrapper-swiper', slide6BtnWrapperSwiper_swiperOptions)
+</script>
+
+</html>

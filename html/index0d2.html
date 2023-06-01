@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/swiper-bundle.min.css">
+	<style media="screen">
+		.content-1 {
+			left: 65%;
+			top: 51%;
+			width: 15%;
+			height: 64.5%;
+		}
+	</style>
+
+	<!-- style适配meta10 -->
+	<style>
+		@media screen and (max-width: 1000px) {
+			.content-1 {
+				height: 67.5%;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="page">
+		<!-- logo -->
+		<div class="logo">
+			<img src="../image/index_logo.png" alt="">
+		</div>
+
+		<img src="../image/index0/index0d2.jpg.png" class="bg" id="imgBg" alt="">
+
+
+		<div class="content-wrapper">
+			<div class="content content-1" onclick="set_tabBar('index2', 'win', {isWin:true},null, 2)"></div>
+		</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script src="../script/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+	apiready = function () {
+		api.parseTapmode();
+		// tds.js 函数
+		tabCreate(0, 'frame')
+	}
+
+	function closeFn() {
+		api.closeFrame()
+	}
+</script>
+
+</html>

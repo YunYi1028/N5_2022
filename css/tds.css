@@ -1,0 +1,370 @@
+@font-face {
+    font-family: 'OPPOSans-B';
+    src: url(../font/OPPOSans-B.ttf);
+}
+
+@font-face {
+    font-family: 'OPPOSans-H';
+    src: url(../font/OPPOSans-H.ttf);
+}
+
+@font-face {
+    font-family: 'OPPOSans-L';
+    src: url(../font/OPPOSans-L.ttf);
+}
+
+@font-face {
+    font-family: 'OPPOSans-M';
+    src: url(../font/OPPOSans-M.ttf);
+}
+
+@font-face {
+    font-family: 'OPPOSans-R';
+    src: url(../font/OPPOSans-R.ttf);
+}
+
+input {
+    margin: 0;
+    border: none;
+    appearance: none;
+    outline: none;
+}
+
+select {
+    appearance: none;
+    text-align: center;
+}
+
+.crossbtn{
+    position: absolute;
+    right: 41.5px;
+    top: 41px;
+    width: 50px;
+    height: 50px;
+    z-index: 9999;
+}
+
+* {
+    font-family: 'OPPOSans-R';
+    color: #212121;
+    scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+body {
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+.page {
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+}
+
+.flex,
+.flex-d {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-d {
+    flex-direction: column;
+}
+
+img {
+    width: 100%;
+}
+
+.logo {
+    position: fixed;
+    left: 5.8%;
+    top: -1%;
+    width: 9%;
+    z-index: 9;
+    opacity: 1;
+    transition: 0.75s all;
+}
+
+.content-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.content {
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    left: 50%;
+    top: 50%;
+    background-color: transparent;
+    z-index: 2;
+}
+
+video, .bg, #bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.normalbtn {
+    width: 100px;
+    height: 39px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 30px;
+    text-shadow: 0px 4px 2px rgba(0, 110, 110, 0.28);
+}
+
+.bg2, #bg2 {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.bg3, #bg3 {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.closebtn {
+    position: fixed;
+    float: right;
+    top: 124px;
+    right: 127px;
+    z-index: 9999;
+}
+
+.btn {
+    position: fixed;
+    float: right;
+    top: 30px;
+    right: 30px;
+    z-index: 9999;
+}
+
+.key {
+    float: right;
+    margin-left: 8px;
+    width: 37px;
+    height: 37px;
+}
+
+div.statenav {
+    position: absolute;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;
+    top: 80px;
+    left: 0;
+    padding: 0px;
+    width: 100%;
+    /*opacity: 0;*/
+}
+
+.statebtns {
+    height: 55px;
+    width: 76px;
+    padding-left: 0px;
+}
+
+.arrow {
+    position: fixed;
+    width: 28px;
+    left: 484px;
+    top: 20px;
+    transform: rotate(270deg)
+}
+
+.down {
+    position: fixed;
+    width: 28px;
+    left: 484px;
+    bottom: 20px;
+    transform: rotate(90deg)
+}
+
+.left {
+    position: fixed;
+    z-index: 9999;
+    width: 28px;
+    left: 20px;
+    bottom: 300px;
+    transform: rotate(180deg)
+}
+
+.right {
+    position: fixed;
+    z-index: 9999;
+    width: 28px;
+    right: 20px;
+    bottom: 300px;
+}
+
+.arrowpre {
+    position: fixed;
+    z-index: 2;
+    width: 28px;
+    right: 40px;
+    bottom: 40px;
+    transform: rotate(180deg)
+}
+
+.arrownext {
+    position: fixed;
+    z-index: 2;
+    width: 28px;
+    right: 40px;
+    bottom: 40px;
+    transform: rotate(0deg)
+}
+
+button {
+    border: 0;
+    background-color: transparent;
+    outline: none;
+}
+
+div.nav {
+    position: absolute;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    left: 16.6%;
+    width: 66.8%;
+    height: 106px;
+    /*background-image: url("../image/index1tabbg.png");*/
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: bottom;
+}
+
+
+.sbtns {
+    height: 67px;
+    width: 53px;
+    padding: 0 38px 10px 38px;
+}
+
+.login {
+    width: 120px;
+    height: 73px;
+    position: absolute;
+    left: 27px;
+    top: 23px;
+    /*background-image: url("../image/unlogin.png");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.user {
+    position: relative;
+    left: 73px;
+    top: 11px;
+    font-size: 11px;
+    color: #fff;
+}
+
+.head {
+    position: absolute;
+    left: 33px;
+    top: 25px;
+    width: 56.5px;
+    height: 56.5px;
+    border-radius: 50%;
+}
+
+.headp {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    left: 0;
+    top: 0;
+}
+
+.loginbtn {
+    position: relative;
+    left: 73px;
+    top: 0px;
+    background-color: rgba(125, 213, 199, 0.74);
+    border-radius: 30px;
+    border: 1px solid rgba(125, 213, 199, 0.24);
+    color: #fff;
+    padding: 2px 8px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 6px;
+}
+
+.mask-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: -1;
+    opacity: 0;
+    transition: 0.5s all;
+}
+
+.mask-loding {
+    position: absolute;
+    transform: translateY(-50%) translateX(-50%);
+    left: 50%;
+    top: 50%;
+    width: 20%;
+    height: 30%;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+
+.mask-loding .loader-17 {
+    width: 43px;
+    height: 43px;
+    border-top: 3px solid #212121;
+}
+
+.mask-loding .loader-17+.text {
+    margin-top: 30px;
+}
+
+.disable {
+    pointer-events: none;
+}
+
+/* message.js */
+.ui__alert .ui__alert_content {
+    overflow: hidden;
+}
+
+.btn_cancel {
+    border: none !important;
+    background-color: #017aff !important;
+    color: #fff !important;
+}
+/* message.js end */

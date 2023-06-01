@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+    <style media="screen">
+        .page {
+            background-color: #fff;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .slide-inner {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* videoCssS */
+        .img-wrapper div {
+            background: linear-gradient(to right bottom, rgba(0, 0, 0, .6), rgba(0, 0, 0, .3), rgba(0, 0, 0, .2));
+            background: rgba(0, 0, 0, .8);
+            backdrop-filter: blur(3px);
+            opacity: 0;
+            transition: 0.25s all;
+        }
+
+        .slide2-video,
+        .slide3-video,
+        .slide5-video {
+            opacity: 0;
+            transition: 0.5s opacity;
+            z-index: 1;
+        }
+
+        #slide2-video-0,
+        #slide3-video-0,
+        #slide5-video-0 {
+            opacity: 1;
+        }
+
+        /* videoCssE */
+        .slide2-btn-1 {
+            width: 21%;
+            height: 64%;
+            position: absolute;
+            top: 18%;
+            left: 50%;
+            z-index: 2;
+        }
+
+        .slide2-btn-2 {
+            left: 72%;
+        }
+
+        .slide2-btn-0 {
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        .slide3-btn-1 {
+            width: 26%;
+            height: 40%;
+            position: absolute;
+            top: 41%;
+            left: 18%;
+            z-index: 2;
+        }
+
+        .slide3-btn-2 {
+            left: 55%;
+        }
+
+        .slide3-btn-0 {
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        .slide5-btn-1 {
+            width: 26%;
+            height: 40%;
+            position: absolute;
+            top: 37%;
+            left: 11%;
+            z-index: 2;
+        }
+
+        .slide5-btn-2 {
+            left: 37%;
+        }
+
+        .slide5-btn-3 {
+            left: 63%;
+        }
+
+        .slide5-btn-0 {
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        .slide6-btn-1 {
+            width: 32%;
+            height: 53%;
+            position: absolute;
+            top: 27%;
+            left: 7%;
+            z-index: 2;
+        }
+
+        .slide6-btn-2 {
+            left: 66%;
+            top: 10%;
+            height: 77%;
+        }
+
+        .slide6-btn-0 {
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        .slide6-closebtn {
+            position: absolute;
+            z-index: 3;
+            width: 5%;
+            height: 8vh;
+            left: 86.9%;
+            top: 14.4%;
+            opacity: 0;
+        }
+
+        .slide7-img-wrapper {
+            width: 84%;
+            height: 71%;
+            position: absolute;
+            top: 22%;
+            left: 8%;
+            border-bottom-left-radius: 53px;
+            border-bottom-right-radius: 53px;
+            overflow: hidden;
+            overflow-x: auto;
+            padding: 0 50px;
+            box-sizing: border-box;
+        }
+
+        .slide7-img-wrapper img {
+            width: auto;
+            height: 100%;
+        }
+    </style>
+
+    <!-- style适配meta10 -->
+    <style>
+        @media screen and (max-width: 1000px) {}
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- logo -->
+        <div class="logo">
+            <img src="../image/index_logo.png" alt="">
+        </div>
+
+        <!-- swiper -->
+        <div class="swiper">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide swiper-slide1">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-3/slide1-bg.jpg" alt="" class="bg" id="slide1-video-bg-img">
+                        <div class="video-wrapper">
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide2">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-3/slide2-bg.jpg" alt="" class="bg" id="slide2-video-bg-img">
+                        <div class="video-wrapper">
+                        </div>
+
+                        <div class="slide2-btn-wrapper flex-d">
+                            <div class="slide2-btn-1 slide2-btn-0" tapmode onclick="slide2Btn(0)"></div>
+                            <div class="slide2-btn-1" tapmode onclick="slide2Btn(1)"></div>
+                            <div class="slide2-btn-1 slide2-btn-2" tapmode onclick="slide2Btn(2)"></div>
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide3">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-3/slide3-bg.jpg" alt="" class="bg" id="slide3-video-bg-img">
+                        <div class="video-wrapper">
+                        </div>
+
+                        <div class="slide3-btn-wrapper flex-d">
+                            <div class="slide3-btn-1 slide3-btn-0" tapmode onclick="slide3Btn(0)"></div>
+                            <div class="slide3-btn-1" tapmode onclick="slide3Btn(1)"></div>
+                            <div class="slide3-btn-1 slide3-btn-2" tapmode onclick="slide3Btn(2)"></div>
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide4">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-3/slide4-bg.jpg" alt="" class="bg" id="slide4-video-bg-img">
+                        <div class="video-wrapper">
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide5">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-3/slide5-bg.jpg" alt="" class="bg" id="slide5-video-bg-img">
+                        <div class="video-wrapper">
+                        </div>
+
+                        <div class="slide5-btn-wrapper flex-d">
+                            <div class="slide5-btn-1 slide5-btn-0" tapmode onclick="slide5Btn(0)"></div>
+                            <div class="slide5-btn-1" tapmode onclick="slide5Btn(1)"></div>
+                            <div class="slide5-btn-1 slide5-btn-2" tapmode onclick="slide5Btn(0)"></div>
+                            <div class="slide5-btn-1 slide5-btn-3" tapmode onclick="slide5Btn(2)"></div>
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide6">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-3/slide6-bg.jpg" alt="" class="bg" id="slide6-video-bg-img">
+                        <div class="video-wrapper">
+                        </div>
+
+                        <div class="slide6-btn-wrapper flex-d">
+                            <div class="slide6-btn-1" tapmode onclick="slide6Btn(1)"></div>
+                            <div class="slide6-btn-1 slide6-btn-2" tapmode onclick="slide6Btn(2)"></div>
+                        </div>
+
+                        <div class="closebtn slide6-closebtn" tapmode onclick="slide6Btn(0)"></div>
+
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide7">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index2/index2-3/slide7-bg.jpg" alt="" class="bg">
+                        <div class="video-wrapper">
+
+                        </div>
+
+                        <div class="slide7-img-wrapper">
+                            <img src="../image/index2/index2-3/slide7-1-content.png" alt="">
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrowpre">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js" language="javascript" charset="UTF-8"></script>
+<script src="../script/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+    apiready = function () {
+        api.parseTapmode();
+        // tds.js 函数
+        tabCreate(2, 'win')
+
+        setTimeout(() => {
+            let logo = $api.dom('.logo')
+            $api.css(logo, "top:-20%;opacity:0")
+        }, 200);
+
+        /* 把tab_bar放到最后面 */
+        api.bringFrameToFront({
+            from: 'index2',
+        });
+    }
+
+    /* 播放对应视频[传入需要渲染的index] */
+    // 仿照抖音动态渲染video，多个video占用性能高，旧版平板性能不够
+    let videoWrapper = $api.domAll('.video-wrapper')
+    let activeIndex = ''
+    function playCorrespondingVideo(activeIndex) {
+        let str0 = `<video src="../res/index2/index2-3/slide1-bg.mp4" autoplay loop muted class="bg slide1-video"
+                                id="slide1-video-bg"></video>`
+        let str1 = `<video src="../res/index2/index2-3/slide2-bg.mp4" autoplay loop muted class="bg slide2-video"
+                                id="slide2-video-0"></video>
+                                <video src="../res/index2/index2-3/slide2-1.mp4" class="bg slide2-video" id="slide2-video-1" autoplay
+                                loop muted></video>
+                                <video src="../res/index2/index2-3/slide2-2.mp4" class="bg slide2-video" id="slide2-video-2" autoplay
+                                loop muted></video>`
+        let str2 = `<video src="../res/index2/index2-3/slide3-bg.mp4" autoplay loop muted class="bg slide3-video"
+                                id="slide3-video-0"></video>
+                                <video src="../res/index2/index2-3/slide3-1.mp4" class="bg slide3-video" id="slide3-video-1" autoplay
+                                loop muted></video>
+                                <video src="../res/index2/index2-3/slide3-2.mp4" class="bg slide3-video" id="slide3-video-2" autoplay
+                                loop muted></video>`
+        let str3 = `<video src="../res/index2/index2-3/slide4-bg.mp4" autoplay loop muted class="bg slide4-video"
+                                id="slide4-video-bg"></video>`
+        let str4 = `<video src="../res/index2/index2-3/slide5-bg.mp4" autoplay loop muted class="bg slide5-video"
+                                id="slide5-video-0"></video>
+                                <video src="../res/index2/index2-3/slide5-1.mp4" class="bg slide5-video" id="slide5-video-1" autoplay
+                                loop muted></video>
+                                <video src="../res/index2/index2-3/slide5-2.mp4" class="bg slide5-video" id="slide5-video-2" autoplay
+                                loop muted></video>`
+        let str5 = `<video src="../res/index2/index2-3/slide6-bg.mp4" autoplay loop muted class="bg slide6-video"
+                                id="slide6-video-0"></video>
+                                <div class="img-wrapper">
+                                    <div id="slide6-video-1" class="bg slide6-video">
+                                        <img src="../image/index2/index2-3/slide6-1-content.png" alt="" class="bg">
+                                    </div>
+
+                                    <div id="slide6-video-2" class="bg slide6-video">
+                                        <img src="../image/index2/index2-3/slide6-2-content.png" alt="" class="bg">
+                                    </div>
+                                </div>`
+        let str6 = `<video src="../res/index2/index2-3/slide7-bg.mp4" autoplay loop muted class="bg slide7-video"
+                                id="slide7-video-0"></video>`
+        let videoHtml = [str0, str1, str2, str3, str4, str5, str6]
+
+        for (let i = 0; i < videoWrapper.length; i++) {
+            if (i == activeIndex) {
+                $api.html(videoWrapper[i], videoHtml[activeIndex])
+                $api.css(videoWrapper[i], 'visibility:visible')
+                // if (i == 0) {
+                //     $api.css($api.dom('.logo'), "top:-20%;opacity:0")
+                // } else if (i == 1) {
+                //     $api.css($api.dom('.logo'), "top:-1%;opacity:1")
+                // }
+            } else {
+                $api.html(videoWrapper[i], '')
+                $api.css(videoWrapper[i], 'visibility:hidden;')
+                if ($api.dom(`.slide${i + 1}-closebtn`)) {
+                    $api.css($api.dom(`.slide${i + 1}-closebtn`), 'opacity:0')
+                }
+                if ($api.byId('topTab')) {
+                    $api.css($api.byId('topTab'), 'opacity:1;pointer-events: visible;filter:none')
+                }
+                if ($api.dom('.logo')) {
+                    $api.css($api.dom('.logo'), 'opacity:1;pointer-events: visible;filter: none')
+                }
+            }
+        }
+    }
+
+    /* swiper参数 */
+    let swiperOptions = {
+        speed: 750, // 单页的滑动过渡消耗时间
+        direction: 'vertical', // 水平方向切换 horizontal 或垂直方向切换 vertical
+        on: {
+            /* swiper初始化 */
+            init: function (swiper) {
+                activeIndex = this.activeIndex
+                playCorrespondingVideo(activeIndex)
+            },
+            /* swiper从当前slide开始过渡到另一个slide时执行 */
+            slideChangeTransitionStart: function () {
+                activeIndex = this.activeIndex
+                playCorrespondingVideo(activeIndex)
+            },
+            /* 触摸释放时执行 */
+            touchEnd: function () {
+                if (this.isEnd && this.touches.currentY < this.touches.startY) {
+                    toast('滑到头啦')
+                }
+            }
+        },
+    }
+    let swiper = new Swiper('.swiper', swiperOptions)
+
+    /* slide2 */
+    let slide2BtnSettime = ''
+    function slide2Btn(id) {
+        clearTimeout(slide2BtnSettime)
+        slide2BtnSettime = setTimeout(() => {
+            let video = $api.byId('slide2-video-' + id)
+            let videoAll = $api.domAll('.slide2-video')
+            if ($api.cssVal(video, 'opacity') == 1) return
+            if (id == 0) {
+                $api.css(video, 'opacity:1;z-index:2')
+            } else {
+                $api.css(video, 'opacity:1;z-index:2')
+            }
+            for (let i = 0; i < videoAll.length; i++) {
+                if (i != id) {
+                    $api.css(videoAll[i], 'opacity:0;z-index:1')
+                }
+            }
+        }, 200)
+    }
+
+    /* slide3 */
+    let slide3BtnSettime = ''
+    function slide3Btn(id) {
+        clearTimeout(slide3BtnSettime)
+        slide3BtnSettime = setTimeout(() => {
+            let video = $api.byId('slide3-video-' + id)
+            let videoAll = $api.domAll('.slide3-video')
+            if ($api.cssVal(video, 'opacity') == 1) return
+            if (id == 0) {
+                $api.css(video, 'opacity:1;z-index:2')
+            } else {
+                $api.css(video, 'opacity:1;z-index:2')
+            }
+            for (let i = 0; i < videoAll.length; i++) {
+                if (i != id) {
+                    $api.css(videoAll[i], 'opacity:0;z-index:1')
+                }
+            }
+        }, 200)
+    }
+
+    /* slide5 */
+    let slide5BtnSettime = ''
+    function slide5Btn(id) {
+        clearTimeout(slide5BtnSettime)
+        slide5BtnSettime = setTimeout(() => {
+            let video = $api.byId('slide5-video-' + id)
+            let videoAll = $api.domAll('.slide5-video')
+            if ($api.cssVal(video, 'opacity') == 1) return
+            if (id == 0) {
+                $api.css(video, 'opacity:1;z-index:2')
+            } else {
+                $api.css(video, 'opacity:1;z-index:2')
+            }
+            for (let i = 0; i < videoAll.length; i++) {
+                if (i != id) {
+                    $api.css(videoAll[i], 'opacity:0;z-index:1')
+                }
+            }
+        }, 200)
+    }
+
+    /* slide6 */
+    let slide6BtnSettime = ''
+    function slide6Btn(id) {
+        clearTimeout(slide6BtnSettime)
+        slide6BtnSettime = setTimeout(() => {
+            let video = $api.byId('slide6-video-' + id)
+            let videoAll = $api.domAll('.slide6-video')
+            if ($api.cssVal(video, 'opacity') == 1) return
+            if (id == 0) {
+                $api.css(video, 'opacity:1;z-index:2')
+                $api.css($api.dom('.logo'), 'opacity:1;pointer-events: visible;filter:none')
+                $api.css($api.byId('topTab'), 'opacity:1;pointer-events: visible;filter:none')
+            } else {
+                $api.css(video, 'opacity:1;z-index:2')
+                $api.css($api.dom('.logo'), 'opacity:0.25;pointer-events: none;filter: blur(2px)')
+                $api.css($api.byId('topTab'), 'opacity:0.25;pointer-events: none;filter: blur(2px)')
+            }
+            for (let i = 0; i < videoAll.length; i++) {
+                if (i != id) {
+                    $api.css(videoAll[i], 'opacity:0;z-index:1')
+                }
+            }
+        }, 200)
+    }
+
+</script>
+
+</html>

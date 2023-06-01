@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+    <style media="screen">
+        .content {
+            left: 50%;
+            top: 54.2%;
+            width: 11%;
+            height: 17%;
+        }
+
+        .content-1 {
+            left: 70.9%;
+        }
+
+        .content-2 {
+            left: 82.6%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- logo -->
+        <div class="logo">
+            <img src="../image/index_logo.png" alt="">
+        </div>
+
+        <!-- 背景 -->
+        <video src="../res/index3/2.mp4" poster="../image/index3/poster_bg.jpg" autoplay loop muted class="bg"
+            id="vidBg" data-src="../res/index3/2.mp4"></video>
+
+        <!-- content -->
+        <div class="content-wrapper">
+            <div class="content content-1" onclick="set_tabBar('index3-1','notab')"></div>
+            <div class="content content-2" onclick="set_tabBar('index3-2','notab')"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script src="../script/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+
+    apiready = function () {
+        api.parseTapmode();
+        // tds.js 函数
+        tabCreate(1, 'frame')
+
+        api.addEventListener({
+            name: 'openNoTab'
+        }, function (ret) {
+            setTimeout(() => {
+                document.getElementById('vidBg').src = ''
+            }, 400);
+        })
+
+        api.addEventListener({
+            name: 'closeFrame'
+        }, function (ret) {
+            document.getElementById('vidBg').src = document.getElementById('vidBg').dataset.src
+        })
+
+        store_save_recordFn()
+    }
+
+    /* 缓存-保存记录 */
+    function store_save_recordFn() {
+        let answerCache = $api.getStorage('answerCache') ? $api.getStorage('answerCache') : [] // 答案缓存
+        for (let i in answerCache) {
+            if (JSON.stringify(answerCache[i].save_record_params) != '{}') {
+                save_record(answerCache[i].save_record_params).then(e => {
+                    console.log(JSON.stringify(e));
+                    console.log(JSON.stringify(answerCache[i]));
+                    answerCache[i].answer = []
+                    answerCache[i].answerId = 0
+                    answerCache[i].save_record_params = {}
+                    $api.setStorage('answerCache', answerCache)
+                }).catch(() => { }).finally(() => {
+                })
+            }
+        }
+    }
+</script>
+
+</html>

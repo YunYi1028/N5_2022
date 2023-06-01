@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<style media="screen">
+		div.nav {
+			background-image: url("../image/index1tabbg.png");
+		}
+
+		.login {
+			background-image: url("../image/unlogin.png");
+		}
+
+		.content-1 {
+			bottom: -300px;
+			left: 5%;
+		}
+
+		.act_icon {
+			position: absolute;
+			left: 5%;
+			bottom: -300px;
+			width: 126.5px;
+		}
+
+		.index_act_icon2 {
+			position: absolute;
+			bottom: 0px;
+			right: 5%;
+			width: 12.5%;
+			height: 20%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="page">
+
+		<!-- logo -->
+		<div class="logo">
+			<img src="../image/index_logo.png" alt="">
+		</div>
+
+		<!-- 背景 -->
+		<video src="" poster="" autoplay loop muted class="bg" id="vidBg"></video>
+
+		<!-- content -->
+		<div class="content-wrapper">
+
+			<!-- 新惠优享 -->
+			<div class="content content-1">
+				<img src="../image/index_act_icon.png" alt="" class="act_icon" tapmode
+					onclick="set_tabBar('index0','notab')">
+			</div>
+
+			<!-- 美养清单 -->
+			<!-- <div class="content content-2" onclick="set_tabBar('index3-1','notab')">
+				<img src="../image/index_act_icon2.png" alt="" class="bg">
+				<div class="index_act_icon2" tapmode onclick="set_tabBar('index5','notab')"></div>
+			</div> -->
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/anime.js"></script>
+<script type="text/javascript">
+	let _judge = _judgeFn()
+	console.log(_judge);
+	let _src = ''
+	if (_judge == '春季') {
+		_src = '../res/index_chun.mp4'
+	} else if (_judge == '夏季') {
+		_src = '../res/index_xia.mp4'
+	} else if (_judge == '秋季') {
+		_src = '../res/index_qiu.mp4'
+	} else if (_judge == '冬季') {
+		_src = '../res/index_don.mp4'
+	}
+	let vidBg = document.getElementById('vidBg')
+	vidBg.src = _src
+	apiready = function () {
+		api.parseTapmode();
+
+		openTab(0)
+		logoIn()
+		actIn()
+
+		setTimeout(() => {
+			actLoop()
+		}, 2000)
+
+		/* 应用全屏 */
+		api.setFullScreen({
+			fullScreen: true
+		});
+
+		/* 返回键退出程序 */
+		api.addEventListener({
+			name: 'keyback'
+		}, function (ret, err) {
+			closeWidget()
+		});
+
+		/* 云修复使用静默修复时，更新完毕事件 */
+		api.addEventListener({
+			name: 'smartupdatefinish'
+		}, function (ret, err) {
+			api.confirm({
+				title: '云修复完成',
+				msg: '重启生效是否重启?',
+				buttons: ['确定', '取消']
+			}, function (ret, err) {
+				var index = ret.buttonIndex;
+				if (index == 1) {
+					api.rebootApp();
+				}
+			});
+		});
+
+		/* closeToWin <= tds.js */
+		api.addEventListener({
+			name: 'closeToWin'
+		}, function (ret, err) {
+			let frames = api.frames();
+			for (let i in frames) {
+				if (frames[i].name != 'tab_bar') {
+					api.closeFrame({
+						name: frames[i].name
+					})
+				}
+			}
+		});
+
+		/* 关闭窗口初始化tabBar和动画 <= tds.js */
+		api.addEventListener({
+			name: 'set_tabBar'
+		}, function (ret, err) {
+			anime({
+				targets: '.act_icon',
+				translateY: '-310px',
+				loop: false,
+				duration: 700,
+				easing: 'easeInOutQuart',
+			});
+			setTimeout(() => {
+				actLoop()
+			}, 700)
+		});
+
+		/* 关闭窗口初始化tabBar和动画 <= tds.js */
+		api.addEventListener({
+			name: 'set_tabBarcss'
+		}, function (ret, err) {
+			anime({
+				targets: '.act_icon',
+				translateY: '-310px',
+				loop: false,
+				duration: 700,
+				easing: 'easeInOutQuart',
+			});
+			setTimeout(() => {
+				actLoop()
+			}, 700)
+		});
+
+		/* 打开窗口取消动画 <= tds.js */
+		api.addEventListener({
+			name: 'open'
+		}, function (ret) {
+			anime.remove('.act_icon');
+			anime({
+				targets: '.act_icon',
+				translateY: '300px',
+				loop: 0,
+				easing: 'easeInOutQuart',
+			});
+		})
+
+		loginFn()
+		// $api.rmStorage('answerCache')
+	}
+
+	function loginFn() {
+		let login_params = { account: '15977778888', password: '111111' }
+		login(login_params).then(e => {
+			$api.setStorage('admintoken', e.data.token)
+		}).catch((e) => {
+			if (e.code == 0 || e.code == 1) {
+				api.actionSheet({
+					title: e.msg,
+					buttons: ['重试']
+				}, function (ret, err) {
+					if (ret.buttonIndex == 1) {
+						loginFn()
+					}
+				});
+			}
+		})
+	}
+
+	function logoIn() {
+		setTimeout(() => {
+			let logo = $api.dom('.logo')
+			$api.css(logo, 'top:-1%;opacity:1');
+		}, 1000)
+	}
+
+	function actIn() {
+		anime({
+			targets: '.act_icon',
+			translateY: '-310px',
+			loop: false,
+			duration: 2000,
+			easing: 'easeInOutQuart',
+		});
+	}
+
+	function actLoop() {
+		anime({
+			targets: '.act_icon',
+			translateY: -320,
+			loop: true,
+			direction: 'alternate',
+			duration: 2000,
+			easing: 'easeInOutQuart',
+		});
+	}
+
+	//关闭程序
+	function closeWidget() {
+		api.closeWidget({
+			id: 'A6109108652303',
+			retData: {
+				name: 'closeWidget'
+			},
+			animation: {
+				type: 'push',
+				subType: 'from_bottom',
+				duration: 500
+			}
+		});
+	}
+</script>
+
+</html>

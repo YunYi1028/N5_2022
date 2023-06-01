@@ -1,0 +1,57 @@
+<widget id="A6109108652303" version="0.0.29">
+
+	<name>N5_2022</name>
+
+	<description>Ublue-TDS</description>
+
+	<author email="1921272954@qq.com" href="http://www.apicloud.com">Ublue</author>
+
+	<content src="index.html"/>
+
+	<access origin="*"/>
+
+	<preference name="pageBounce" value="false"/>
+
+	<preference name="appBackground" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="hScrollBarEnabled" value="false"/>
+
+	<preference name="vScrollBarEnabled" value="false"/>
+
+	<preference name="autoLaunch" value="true"/>
+
+	<preference name="fullScreen" value="true"/>
+
+	<preference name="autoUpdate" value="true"/>
+
+	<preference name="smartUpdate" value="true"/>
+
+	<preference name="debug" value="true"/>
+
+	<preference name="softInputMode" value="pan"/>
+
+	<preference name="statusBarAppearance" value="true"/>
+
+	<preference name="iOS7StatusBarAppearance" value="true"/>
+
+	<permission name="readPhoneState"/>
+
+	<permission name="camera"/>
+
+	<permission name="record"/>
+
+	<permission name="location"/>
+
+	<permission name="fileSystem"/>
+
+	<permission name="internet"/>
+
+	<permission name="bootCompleted"/>
+
+	<permission name="hardware"/>
+
+</widget>

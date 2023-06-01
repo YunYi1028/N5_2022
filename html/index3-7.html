@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <style media="screen">
+        .page {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .content-1 {
+            top: 51%;
+            left: 53%;
+            width: 86%;
+            height: 80%;
+            background: url(../image/index3/index3-7/content.png) center no-repeat;
+            background-size: contain;
+            position: absolute;
+        }
+
+        .content-2 {
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .radarmap {
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            left: 23%;
+            top: 48%;
+            width: 60%;
+            height: 82%;
+        }
+
+        #no-radarmap {
+            width: 35%;
+            height: 0%;
+            padding-bottom: 35%;
+            border-radius: 100%;
+            background: linear-gradient(to right bottom,
+                    rgba(0, 0, 0, .6),
+                    rgba(0, 0, 0, .3),
+                    rgba(0, 0, 0, .2));
+            background: rgba(0, 0, 0, .7);
+            backdrop-filter: blur(3px);
+            z-index: 2;
+        }
+
+        .no-radarmap-text {
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            left: 50%;
+            top: 50%;
+            color: white;
+            text-shadow: 0px 0px 5px white;
+        }
+
+        .username {
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            left: 55%;
+            top: 23%;
+            font-family: 'OPPOSans-L';
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .username span {
+            padding: 0 10px;
+        }
+
+        .corporeity-wrapper {
+            position: absolute;
+            left: 47.5%;
+            top: 32%;
+            font-family: 'OPPOSans-R';
+            color: #fff;
+            font-size: 12px;
+            align-items: flex-start;
+        }
+
+        .corporeity-text {
+            margin-bottom: 10px;
+        }
+
+        .corporeity-text span {
+            font-family: 'OPPOSans-H';
+            padding: 0 0 0 10px;
+            color: #212121;
+        }
+
+        .corporeity-text .span2 {
+            color: #fff;
+        }
+
+        .question-wrapper {
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            left: 67.5%;
+            top: 64.5%;
+            width: 36%;
+            height: 21%;
+            overflow: hidden;
+            overflow-y: auto;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .question-wrapper * {
+            font-size: 12px;
+            padding: 2px 10px;
+            margin-top: 10px;
+            margin-right: 10px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            float: left;
+        }
+
+        .project-wrapper {
+            position: absolute;
+            transform: translateY(-50%);
+            right: -22.5%;
+            top: 50%;
+            width: 24%;
+            height: 66%;
+            border-radius: 15px;
+            z-index: 3;
+            padding: 10px 0;
+            transition: 0.5s all;
+            background: linear-gradient(to right bottom,
+                    rgba(0, 0, 0, .6),
+                    rgba(0, 0, 0, .3),
+                    rgba(0, 0, 0, .2));
+            background: rgba(0, 0, 0, .7);
+            backdrop-filter: blur(3px);
+        }
+
+        .project-wrapper .content {
+            width: 100%;
+            height: 100%;
+            justify-content: flex-start;
+            align-items: flex-start;
+            overflow: hidden;
+            overflow-y: auto;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .project {
+            width: 70%;
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+
+        .project .title {
+            width: 100%;
+            height: 20px;
+            color: #fff;
+            font-size: 12px;
+            padding-left: 5px;
+        }
+
+        .project .img {
+            width: 100%;
+            height: 83px;
+        }
+
+        .project .img img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .btn {
+            position: absolute;
+            transform: translateY(-50%);
+            left: -5%;
+            top: 50%;
+            width: 10%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- content -->
+        <div class="content-wrapper">
+            <div class="content content-2"></div>
+            <div class="content content-1 flex">
+                <div class="radarmap" id="no-radarmap">
+                    <div class="no-radarmap-text">未进行体质检测</div>
+                </div>
+                <div class="radarmap" id="radarmap"></div>
+                <div class="username" id="username">2022.04.25<span>/</span>吴孟达</div>
+                <div class="corporeity-wrapper flex-d" id="corporeity-wrapper">
+                    <div class="corporeity-text">通过本次[体质检测]，您属于<span class="span2">未进行体质检测</span></div>
+                    <div class="corporeity-text">体质重点偏颇倾向于<span>未进行体质检测</span></div>
+                    <div class="corporeity-text">同时还兼有 <span>未进行体质检测</span> </div>
+                </div>
+                <div class="question-wrapper" id="question-wrapper">
+                    <!-- <div>阳气虚</div> -->
+                    <!-- <div>阳气不足</div> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="project-wrapper" id="project-wrapper">
+            <div class="content flex-d" id="project-contetn">
+                <!-- <div class="project">
+                    <div class="title">脏和服</div>
+                    <div class="img">
+                        <img src="../image/index4/project.png" alt="">
+                    </div>
+                </div> -->
+            </div>
+            <div class="btn" onclick="projectCss()">
+                <img src="../image/index3/index3-7/btn.png" alt="">
+            </div>
+        </div>
+
+        <!-- 点击背景音乐 -->
+        <!-- <div id="bgm">
+            <audio id="click" src="../res/click.wav"></audio>
+        </div> -->
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script type="text/javascript" src="../script/jquery-3.5.1.min.js"></script>
+
+<script type="text/javascript" src="../script/chart/echarts.common.min.js"></script>
+<script type="text/javascript" src="../script/chart/echarts.min.js"></script>
+<script type="text/javascript">
+
+    apiready = function () {
+        api.parseTapmode();
+        // tds.js 函数
+        tabCreate(0, 'frame')
+
+        get_record_detailFn(api.pageParam.id)
+    }
+
+    /* 记录详情 */
+    function get_record_detailFn(id) {
+        get_record_detail({ id }).then(e => {
+            let userinfo = JSON.parse($api.getStorage('user_info'))
+            let data = e.data
+            // console.log(JSON.stringify(data));
+            $("#username").html(`${data.createtime.substr(0, 10)}<span>/</span>${userinfo.nickname}`)
+
+            let score = [data.yangxu, data.yinxu, data.qixu, data.tanshi, data.shire, data.xueyu, data.tebing, data.qiyu]
+            score.sort(function (a, b) {
+                return b - a
+            })
+
+            radarMapAloneFn(data.tanshi, data.yangxu, data.yinxu, data.qixu, data.pinghe, data.shire, data.tebing, data.xueyu, data.qiyu)
+            
+            if (data.symptom && data.symptom.length < 6) {
+                let str = ''
+                for (let i = 1; i < data.symptom.length; i++) {
+                    if (i + 1 == data.symptom.length || i == 4) {
+                        str += `<span>${data.symptom[i]}</span>`
+                    } else {
+                        str += `<span>${data.symptom[i]}</span>&nbsp;&nbsp;&nbsp;/`
+                    }
+                }
+
+                if (data.symptom[0] == '平和质') {
+                    score[0] = data.pinghe
+                }
+
+                $api.css($api.byId('no-radarmap'), 'display:none')
+
+                if (data.symptom[0] == '平和质' && score[0] == 100 && data.yangxu == 0 && data.yinxu == 0 && data.qixu == 0 && data.tanshi == 0 && data.shire == 0 && data.xueyu == 0 && data.tebing == 0 && data.qiyu == 0) { // 典型平和质
+                    $('#corporeity-wrapper').html(`<div class="corporeity-text">通过本次[体质检测]，您属于典型的<span class="span2">平和体质</span></div>
+                                        <div class="corporeity-text"><span>${data.symptom[0]}(${score[0]}分)</span></div>
+                                        <div class="corporeity-text">遵循四季养可长期保持平和质</div>
+                                    </div>`)
+
+                } else if (data.symptom[0] == '平和质' && data.yangxu < 30 && data.yinxu < 30 && data.qixu < 30 && data.tanshi < 30 && data.shire < 30 && data.xueyu < 30 && data.tebing < 30 && data.qiyu < 30) { // 是平和质
+                    str = str ? '同时还需调善' + str : ''
+                    $('#corporeity-wrapper').html(`<div class="corporeity-text">通过本次[体质检测]，您属于<span class="span2">平和体质</span></div>
+                                        <div class="corporeity-text"><span>${data.symptom[0]}(${score[0]}分)</span></div>
+                                        <div class="corporeity-text">${str}</div>
+                                    </div>`)
+                } else if (data.symptom[0] == '平和质' && data.yangxu < 40 && data.yinxu < 40 && data.qixu < 40 && data.tanshi < 40 && data.shire < 40 && data.xueyu < 40 && data.tebing < 40 && data.qiyu < 40) { // 基本是平和质
+                    str = str ? '同时还需调善' + str : ''
+                    $('#corporeity-wrapper').html(`<div class="corporeity-text">通过本次[体质检测]，您属于<span class="span2">平和体质</span></div>
+                                        <div class="corporeity-text">体质重点倾向于<span>${data.symptom[0]}(${score[0]}分)</span></div>
+                                        <div class="corporeity-text">${str}</div>
+                                    </div>`)
+                } else { // 偏颇体质
+                    str = str ? '同时还兼有' + str : ''
+                    $('#corporeity-wrapper').html(`<div class="corporeity-text">通过本次[体质检测]，您属于<span class="span2">偏颇体质</span></div>
+                                        <div class="corporeity-text">体质重点偏颇倾向于<span>${data.symptom[0]}(${score[0]}分)</span><span style="font-size:6px;padding: 0 0 0 5px;color: #666666;font-family: 'OPPOSans-M';"></span></div>
+                                        <div class="corporeity-text">${str}</div>
+                                    </div>`)
+                }
+
+                if (data.problem) {
+                    let str2 = ''
+                    for (let i in data.problem) {
+                        str2 += `<div>${data.problem[i]}</div>`
+                    }
+                    str2 = str2 ? str2 : '<div>无需改善</div>'
+                    $('#question-wrapper').html(str2)
+                }
+            } else {
+                projectCss()
+            }
+
+            if (data.plan_ids) {
+                // console.log(JSON.stringify(data));
+                let str3 = ''
+                for (let i in data.plan_ids) {
+                    let planData = { id: '', src: `../image/index4/project.png`, onclick: `toast('暂无品项')` }
+                    switch (data.plan_ids[i]) {
+                        case '督脉元神':
+                            planData.id = 2
+                            break;
+                        case '脑轻松':
+                            planData.id = 3
+                            break;
+                        case '肩舒雅':
+                            planData.id = 1
+                            break;
+                        case '蜜臀清毒':
+                            planData.id = 4
+                            break;
+                        case '骨轻灵':
+                            planData.id = 5
+                            break;
+                        case '脏腑和':
+                            planData.id = 6
+                            break;
+                        case '腰肾健':
+                            planData.id = 7
+                            break;
+                        case '舒心健胸':
+                            planData.id = 8
+                            break;
+                        case '肋骨净':
+                            planData.id = 9
+                            break;
+                        case '三重净淋':
+                            planData.id = 10
+                            break;
+                        case '舒淋康颈':
+                            planData.id = 11
+                            break;
+                    }
+                    if (planData.id) {
+                        planData.src = `../image/p${planData.id}/banner.jpg`
+                        planData.onclick = `openWin('p${planData.id}')`
+                    }
+                    str3 += `<div class="project">
+                            <div class="title">${data.plan_ids[i]}</div>
+                            <div class="img" onclick="${planData.onclick}">
+                                <img src="${planData.src}" alt="">
+                            </div>
+                        </div>`
+                }
+                $('#project-contetn').html(str3)
+            }
+
+        }).catch(() => { })
+    }
+
+    /* 雷达图一条数据 */
+    function radarMapAloneFn(d, a, b, c, i, e, g, f, h) {
+        //数据
+        const dataThis = [
+            [d, a, b, c, i, e, g, f, h]
+        ];
+        let chartDom = document.getElementById('radarmap');
+        let myChart = echarts.init(chartDom);
+        let option;
+
+        const lineStyle = {
+            width: 1,
+            opacity: 0
+        };
+        option = {
+            legend: {
+                bottom: 5,
+                data: ['this', 'previous'],
+                itemGap: 20,
+                textStyle: {
+                    color: '#67F9D8',
+                    fontSize: 7
+                },
+                selectedMode: 'single'
+            },
+            radar: {
+                indicator: [{
+                    name: '',
+                    max: 110
+                }, {
+                    name: '',
+                    max: 110
+                }, {
+                    name: '',
+                    max: 110
+                }, {
+                    name: '',
+                    max: 110
+                }, {
+                    name: '',
+                    max: 110
+                }, {
+                    name: '',
+                    max: 110
+                }, {
+                    name: '',
+                    max: 110
+                }, {
+                    name: '',
+                    max: 110
+                }, {
+                    name: '',
+                    max: 110
+                },],
+                shape: 'circle',
+                splitNumber: 5,
+                axisName: {
+                    color: 'rgba(255, 255, 255,0)',
+                    fontSize: 7
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: [
+                            'rgba(255, 255, 255, 0)',
+                            'rgba(255, 255, 255, 0)',
+                            'rgba(255, 255, 255, 0)',
+                            'rgba(255, 255, 255, 0)',
+                            'rgba(255, 255, 255, 0)',
+                            'rgba(255, 255, 255, 0)'
+                        ].reverse()
+                    }
+                },
+                splitArea: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: 'rgba(255, 255, 255, 0.7)'
+                    }
+                }
+            },
+            series: [{
+                name: 'SkinThis',
+                type: 'radar',
+                lineStyle: lineStyle,
+                data: dataThis,
+                // symbol: 'rect',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'right',
+                        textStyle: {
+                            fontSize: 8,
+                            color: '#fff'
+                        }
+                    },
+                    formatter: function (params) {
+                        return params.value;
+                    }
+                },
+                itemStyle: {
+                    color: '#e29764'
+                },
+                areaStyle: {
+                    opacity: 0.2
+                }
+            }]
+        };
+
+        option && myChart.setOption(option);
+    }
+
+    /* proejct css动画 */
+    $(".content-wrapper").on("click", function (e) {
+        $('#project-wrapper').css('right', '-22.5%')
+    });
+    let flag = $('#project-wrapper').css('right')
+    function projectCss() {
+        if ($('#project-wrapper').css('right') != flag) {
+            $('#project-wrapper').css('right', '-22.5%')
+        } else {
+            $('#project-wrapper').css('right', '-3.5%')
+        }
+    }
+
+    /* tds.js */
+    $(".content-2").on("click", function (e) {
+        // closeFn()
+    });
+    function closeFn() {
+        api.closeFrame()
+    }
+</script>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <style media="screen">
+        .content-1 {
+            top: 73%;
+            left: 50%;
+            width: 13%;
+            height: 6%;
+            background-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- logo -->
+        <div class="logo">
+            <img src="../image/index_logo.png" alt="">
+        </div>
+
+        <!-- 背景 -->
+        <video src="../res/index3/5.mp4" poster="../image/index3/index3-3/poster_bg.jpg" autoplay loop muted class="bg" id="vidBg" data-src="../res/index3/5.mp4"></video>
+
+        <!-- content -->
+        <div class="content-wrapper">
+            <div class="content content-1" onclick="physicalTesting()"></div>
+        </div>
+
+        <!-- 点击背景音乐 -->
+        <!-- <div id="bgm">
+            <audio id="click" src="../res/click.wav"></audio>
+        </div> -->
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script type="text/javascript" src="../script/index3-4/project.js"></script>
+<script type="text/javascript">
+
+    apiready = function () {
+        api.parseTapmode();
+        // tds.js 函数
+        tabCreate(2, 'frame')
+
+        api.addEventListener({
+            name: 'openNoTab'
+        }, function (ret) {
+            setTimeout(() => {
+                document.getElementById('vidBg').src = ''
+            }, 400);
+        })
+
+        api.addEventListener({
+            name: 'closeFrame'
+        }, function (ret) {
+            document.getElementById('vidBg').src = document.getElementById('vidBg').dataset.src
+        })
+    }
+
+    /* 体质检测按钮 */
+    function physicalTesting() {
+        dataInitialize()
+        set_tabBar('index3-4', 'notab')
+    }
+
+</script>
+
+</html>

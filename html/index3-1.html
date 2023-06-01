@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <link rel="stylesheet" type="text/css" href="../css/date/date.css">
+    <style media="screen">
+        .content-1 {
+            top: 46%;
+            left: 51%;
+            width: 52%;
+            height: 80%;
+            background-image: url(../image/index3/index3-1/register_bg.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .content-1-register-wrapper {
+            width: 44%;
+            height: auto;
+            padding-top: 80px;
+            padding-right: 20px;
+        }
+
+        .content-1-register-content {
+            width: 100%;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .content-1-register-title {
+            color: #fff;
+            position: relative;
+            padding-left: 5px;
+            margin-bottom: 5px;
+            font-family: 'OPPOSans-R';
+        }
+
+        .content-1-register-title-name::before {
+            content: 'XINGMIN';
+            font-family: 'Arial';
+            position: absolute;
+            transform: translateY(-50%) scale(0.4);
+            left: -31%;
+            top: 57%;
+            color: #ff0000;
+            letter-spacing: 20px;
+        }
+
+        .content-1-register-title-tel::before {
+            content: 'DIANHUA';
+            font-family: 'Arial';
+            position: absolute;
+            transform: translateY(-50%) scale(0.4);
+            left: -31%;
+            top: 57%;
+            color: #ff0000;
+            letter-spacing: 20px;
+        }
+
+        .content-1-register-input {
+            width: calc(100% - 26px);
+            border-radius: 12px;
+            padding: 7px 10px;
+            border: 3px solid rgba(202, 202, 202, 0.3);
+            background-color: #fff;
+            outline: none;
+            font-size: 14px;
+            color: #212121;
+        }
+
+        .content-1-register-select {
+            flex: 2;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .content-1-register-select select {
+            width: 100%;
+        }
+
+        .content-1-register-select::before {
+            content: '';
+            position: absolute;
+            transform: translateY(-50%);
+            left: 61%;
+            top: 58%;
+            width: 30px;
+            height: 20px;
+            background: url(../image/index3/index3-1/triangle.png) center no-repeat;
+            background-size: contain;
+            z-index: 2;
+        }
+
+        .content-1-register-input2 {
+            flex: 3;
+            position: relative;
+        }
+
+        .content-1-register-input2::before {
+            content: '';
+            position: absolute;
+            transform: translateY(-50%);
+            left: 75%;
+            top: 58%;
+            width: 30px;
+            height: 20px;
+            background: url(../image/index3/index3-1/triangle.png) center no-repeat;
+            background-size: contain;
+            z-index: 2;
+        }
+
+        .content-1-register-btn {
+            width: 55%;
+            margin-top: 55px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- logo -->
+        <div class="logo">
+            <img src="../image/index_logo.png" alt="">
+        </div>
+
+        <!-- 背景 -->
+        <img src="../image/index3/bg.png" alt="" class="bg">
+
+        <!-- content -->
+        <div class="content-wrapper">
+            <div class="content content-1 flex">
+                <div class="content-1-register-wrapper flex-d">
+                    <div class="content-1-register-content flex-d">
+                        <div class="content-1-register-title content-1-register-title-name">姓名/</div>
+                        <input id="name" class="content-1-register-input" type="text">
+                    </div>
+                    <div class="content-1-register-content flex-d">
+                        <div class="content-1-register-title content-1-register-title-tel">电话/</div>
+                        <input id="tel" class="content-1-register-input" type="number">
+                    </div>
+                    <div class="content-1-register-content flex">
+                        <div class="content-1-register-select">
+                            <select class="content-1-register-input" id="gender">
+                                <option value="0">女</option>
+                                <option value="1">男</option>
+                            </select>
+                        </div>
+                        <div class="content-1-register-input2">
+                            <div id="datePlugin"></div>
+                            <input id="dateinput" class="content-1-register-input" type="text" placeholder="点击输出生日">
+                        </div>
+                    </div>
+                    <!-- 注册按钮 -->
+                    <img src="../image/index3/index3-1/register_btn.png" alt="" class="content-1-register-btn"
+                        onclick="register_submit()">
+                </div>
+            </div>
+        </div>
+
+        <!-- 点击背景音乐 -->
+        <!-- <div id="bgm">
+            <audio id="click" src="../res/click.wav"></audio>
+        </div> -->
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+
+<script type="text/javascript" src="../script/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="../script/date/date.js"></script>
+<script type="text/javascript" src="../script/date/iscroll_date.js"></script>
+<script type="text/javascript">
+
+    apiready = function () {
+        api.parseTapmode();
+        // tds.js 函数
+        tabCreate(2, 'frame')
+
+        // 初始化日期插件
+        $('#dateinput').date();
+    }
+
+    /* 注册按钮 */
+    function register_submit() {
+        let nickname = $api.val($api.byId('name')),
+            mobile = $api.val($api.byId('tel')),
+            gender = $api.val($api.byId('gender')),
+            birthday = $api.val($api.byId('dateinput'))
+        let params = { nickname, mobile, gender, birthday }
+        if (nickname == '' || nickname == null || nickname == undefined || nickname.trim() == '') {
+            toast('请填写您的姓名')
+        } else {
+            // ajax.js
+            checkSubmit_Tel(mobile).then(e => {
+                if (e == 1) {
+                    if (!birthday) {
+                        toast('请填写您的生日')
+                    } else {
+                        // ajax.js
+                        register(params).then(e => {
+                            $api.setStorage('user_info', JSON.stringify(e.data.data.userinfo))
+                            toast('注册成功')
+                            set_tabBar('index3-3', 'notab')
+                            initForm()
+                        }).catch((e) => {
+                            if (e.code == 2) { // 手机号存在
+                                client_list({ keyword: mobile }).then(e => {
+                                    api.alert({
+                                        title: '提示',
+                                        msg: '用户已经存在',
+                                    }, function (ret, err) {
+                                        $api.setStorage('user_info', JSON.stringify(e.data[0]))
+                                        set_tabBar('index3-3', 'notab')
+                                        initForm()
+                                    });
+                                })
+                            }
+                        })
+                    }
+                }
+            })
+        }
+    }
+
+    /* form数据初始化 */
+    function initForm() {
+        $api.val($api.byId('name'), '')
+        $api.val($api.byId('tel'), '')
+        $api.val($api.byId('gender'), '')
+        $api.val($api.byId('dateinput'), '')
+    }
+
+    $api.addEvt($api.byId('name'), 'keypress', function (e) {
+        if (e.keyCode == 13) {
+            document.activeElement.blur();
+            register_submit()
+        }
+    });
+    $api.addEvt($api.byId('tel'), 'keypress', function (e) {
+        if (e.keyCode == 13) {
+            document.activeElement.blur();
+            register_submit()
+        }
+    });
+</script>
+
+</html>

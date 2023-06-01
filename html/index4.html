@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style media="screen">
+        .page {
+            background-color: #fff;
+        }
+
+        .content {
+            left: 50%;
+            top: 27.2%;
+            width: 11%;
+            height: 5%;
+        }
+
+        .content-1 {
+            left: 77.8%;
+        }
+
+        .content-2 {
+            left: 88.9%;
+        }
+
+        #content-1-alert {
+            position: absolute;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            color: #212121;
+            background-color: rgb(255, 255, 255);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: 0.5s all;
+        }
+
+        #content-1-alert::after {
+            content: '';
+            position: absolute;
+            transform: translateX(-50%);
+            left: 50%;
+            top: 95%;
+            border-top: 10px solid #fff;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+        }
+
+        .date {
+            position: absolute;
+            left: 44%;
+            top: 26%;
+            color: #fff;
+            font-size: 12px;
+            transform: scale(0.9);
+        }
+
+        .date span {
+            margin: 0 7px;
+        }
+
+        .project-wrapper,
+        .projectAi-wrapper {
+            position: absolute;
+            left: 41.5%;
+            top: 31.5%;
+            width: 50.5%;
+            height: 52%;
+            overflow: hidden;
+            display: none;
+            padding-top: 40px;
+            padding-bottom: 80px;
+            box-sizing: border-box;
+        }
+
+        .project-wrapper {
+            display: block;
+        }
+
+        .projectAi-wrapper {
+            top: 30%;
+            height: 42.2%;
+            padding-top: 0px;
+            /* display: block; */
+        }
+
+        .project-content,
+        .projectAi-content {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        .projectAi-content {
+            height: calc(100% - 20% - 20px);
+        }
+
+        .search-wrapper {
+            position: absolute;
+            left: 0;
+            top: 0%;
+            width: 45%;
+        }
+
+        .search-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .search-content #search {
+            position: absolute;
+            transform: translateY(-50%);
+            left: 0;
+            padding-left: 20px;
+            top: 40%;
+            width: 75%;
+            height: 68%;
+            font-size: 12px;
+            background-color: transparent;
+        }
+
+        .search-btn {
+            position: absolute;
+            transform: translateY(-50%);
+            right: 0;
+            top: 40%;
+            width: calc(25% - 20px);
+            height: 68%;
+        }
+
+        .title2 {
+            height: 40%;
+            border-bottom: 1px solid rgb(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .title2 img {
+            width: auto;
+            height: 100%;
+            padding-bottom: 10px;
+        }
+
+        .project {
+            width: 31.5%;
+            height: 78px;
+            overflow: hidden;
+            border-radius: 15px;
+            position: relative;
+            margin: 0 9px 10px 0;
+            float: left;
+        }
+
+        .projectAi {
+            display: none;
+        }
+
+        .project img {
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project .title {
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: calc(100% - 14px);
+            height: 25px;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: flex-start;
+            padding-left: 14px;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .project .title .text {
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .project .title img {
+            position: absolute;
+            width: 25px;
+            height: auto;
+            right: 8px;
+        }
+
+        .user_off,
+        .user_on {
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            left: 32.2%;
+            top: 26.5%;
+            width: 5%;
+        }
+
+        .user_on {
+            display: none;
+            left: 32.15%;
+            top: 27%;
+            width: 11%;
+        }
+
+        #user_name {
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            left: 32.2%;
+            top: 27%;
+            font-size: 20px;
+            color: #fff;
+            font-family: 'OPPOSans-L';
+        }
+
+        #user_name .span {
+            font-size: 12px;
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%) scale(0.8);
+            left: 100%;
+            top: 135%;
+            color: #fff;
+            width: 30px;
+            font-family: 'OPPOSans-L';
+        }
+
+        .buy-wrapper {
+            position: absolute;
+            left: 5%;
+            top: 29%;
+            width: 17.5%;
+            height: 53.5%;
+        }
+
+        .buy-wrapper .title {
+            width: calc(100% - 25px);
+            height: 20px;
+            color: #212121;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            margin-bottom: 40px;
+            margin-left: 4px;
+        }
+
+        .buy-wrapper .title .span {
+            width: 100%;
+            color: #fff;
+            position: absolute;
+            transform: scale(0.6) translateX(-50%) translateY(-50%);
+            left: 52%;
+            top: 23%;
+        }
+
+        .buy-content {
+            width: 100%;
+            height: calc(100% - 125px);
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        .buy {
+            width: 100%;
+            height: 32px;
+            font-size: 12px;
+            position: relative;
+            justify-content: flex-start;
+            box-sizing: border-box;
+            padding-left: 10px;
+            background: url(../image/index4/buy.png) center no-repeat;
+            background-size: cover;
+            display: none;
+            align-items: flex-start;
+            padding-top: 2px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .buy img {
+            width: auto;
+            height: 17px;
+            position: absolute;
+            transform: translateY(-50%);
+            top: 34%;
+            right: 6px;
+            opacity: 0;
+        }
+
+        .submit_btn {
+            position: absolute;
+            bottom: -4.5%;
+            left: -4%;
+            width: 75%;
+        }
+
+        #bg {
+            opacity: 0;
+        }
+
+        .order-wrapper {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: none;
+        }
+
+        .order-bg {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            left: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .order-bg::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: inherit;
+            filter: blur(40px);
+        }
+
+        .order-close {
+            width: 3.7%;
+            object-fit: cover;
+            position: absolute;
+            right: 3.1%;
+            top: 0%;
+        }
+
+        .order-buy {
+            width: 27%;
+            height: 82%;
+            position: absolute;
+            left: 3%;
+            top: 7%;
+        }
+
+        .order-wrapper .title {
+            width: 80%;
+            height: 20px;
+            color: #212121;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .order-wrapper .title .span {
+            color: #fff;
+            position: absolute;
+            transform: scale(0.6) translateX(-50%) translateY(-50%);
+            left: 47%;
+            top: 23%;
+            width: 100%;
+        }
+
+        .order-content {
+            background: url(../image/index4/order.png) center no-repeat;
+            background-size: 100%;
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            left: 50%;
+            top: 50%;
+            width: 65%;
+            height: 59%;
+            z-index: 1;
+        }
+
+
+        .order-content .submit_btn {
+            bottom: -4.5%;
+            right: 0px;
+            width: 22%;
+            left: initial;
+        }
+
+        .order-project {
+            width: 100%;
+            height: calc(100% - 35px);
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        .order-project * {
+            margin: 10px 0;
+        }
+    </style>
+
+    <!-- style适配meta10 -->
+    <style>
+        @media screen and (max-width: 1000px) {
+
+            .buy {
+                height: 31px;
+            }
+
+            .date {
+                top: 25%;
+            }
+
+            .user_off,
+            .user_on {
+                top: 26%;
+            }
+
+            #user_name {
+                top: 25%;
+            }
+
+            .project-wrapper,
+            .projectAi-wrapper {
+                top: 33%;
+            }
+
+            .content {
+                top: 26.5%;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- logo -->
+        <div class="logo">
+            <img src="../image/index_logo.png" alt="">
+        </div>
+
+        <!-- 背景 -->
+        <video src="../res/index4/1.mp4" autoplay loop muted class="bg" id="video-bg"></video>
+        <video src="../res/index4/2.mp4" autoplay loop muted class="bg" id="video-bg2"></video>
+
+        <!-- content -->
+        <div class="content-wrapper">
+
+            <!-- user -->
+            <img src="../image/index4/user_off.png" alt="" class="user_off"
+                onclick="set_tabBar('index3-2','notab',{selectuser:true},'reload')">
+            <img src="../image/index4/user_on.gif" alt="" class="user_on"
+                onclick="set_tabBar('index3-2','notab',{selectuser:true},'reload')">
+            <div id="user_name" onclick="set_tabBar('index3-2','notab',{selectuser:true},'reload')"></div>
+            <div class="date" id="date">
+                2020.04.26 <span>/</span> 夏至
+            </div>
+
+            <!-- 项目库、推荐项目按钮 -->
+            <div class="content content-1" id="content-1" onclick="projectLibrary(1)"></div>
+            <div class="content content-2" onclick="projectLibrary(2)"></div>
+            <span id="content-1-alert">请进行体质检测</span>
+
+            <!-- 购物车 -->
+            <div class="buy-wrapper">
+                <div class="title">
+                    已选项目 <div class="span">Selected service</div>
+                </div>
+                <div class="buy-content">
+                    <div class="buy flex" id="buy1" data-name="督脉元神">督脉元神
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(1)">
+                    </div>
+                    <div class="buy flex" id="buy2" data-name="脑轻松">脑轻松
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(2)">
+                    </div>
+                    <div class="buy flex" id="buy3" data-name="腰肾健">腰肾健
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(3)">
+                    </div>
+                    <div class="buy flex" id="buy4" data-name="脏腑和">脏腑和
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(4)">
+                    </div>
+                    <div class="buy flex" id="buy5" data-name="肩舒雅">肩舒雅
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(5)">
+                    </div>
+                    <div class="buy flex" id="buy6" data-name="蜜臀清毒">蜜臀清毒
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(6)">
+                    </div>
+                    <div class="buy flex" id="buy7" data-name="舒心健胸">舒心健胸
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(7)">
+                    </div>
+                    <div class="buy flex" id="buy8" data-name="肋骨净">肋骨净
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(8)">
+                    </div>
+                    <div class="buy flex" id="buy9" data-name="骨轻灵">骨轻灵
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(9)">
+                    </div>
+                    <div class="buy flex" id="buy10" data-name="三重净淋">三重净淋
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(10)">
+                    </div>
+                    <!-- <div class="buy flex" id="buy11" data-name="蜜十八">蜜十八
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(11)">
+                    </div> -->
+                    <div class="buy flex" id="buy12" data-name="舒淋康颈">舒淋康颈
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(12)">
+                    </div>
+                    <!-- <div class="buy flex" id="buy13" data-name="美颜塑">美颜塑
+                        <img src="../image/index4/close.png" alt="" onclick="selectProject(13)">
+                    </div> -->
+                </div>
+                <div class="submit_btn" onclick="submit()">
+                    <img src="../image/index4/btn.png" alt="">
+                </div>
+            </div>
+
+            <!-- 项目库 -->
+            <div class="project-wrapper" id="project-wrapper">
+                <div class="search-wrapper">
+                    <div class="search-content">
+                        <input type="text" name="" id="search" autocapitalize="on" placeholder="输入首拼搜索项目"
+                            onkeyup="searchProject()">
+                        <img src="../image/index4/search.png" alt="">
+                        <div class="search-btn" onclick="searchProject()"></div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div class="project" data-enName="dmys">
+                        <img src="../image/p2/banner.jpg" alt="" onclick="openWin('p2')">
+                        <div class="title flex">
+                            <div class="text">督脉元神</div>
+                            <img id="img1" src="../image/index4/set_off.png" alt="" onclick="selectProject(1)">
+                        </div>
+                    </div>
+                    <div class="project" data-enName="nqs">
+                        <img src="../image/p3/banner.jpg" alt="" onclick="openWin('p3')">
+                        <div class="title flex">
+                            <div class="text">脑轻松</div>
+                            <img id="img2" src="../image/index4/set_off.png" alt="" onclick="selectProject(2)">
+                        </div>
+                    </div>
+                    <div class="project" data-enName="ysj">
+                        <img src="../image/p7/banner.jpg" alt="" onclick="openWin('p7')">
+                        <div class="title flex">
+                            <div class="text">腰肾健</div>
+                            <img id="img3" src="../image/index4/set_off.png" alt="" onclick="selectProject(3)">
+                        </div>
+                    </div>
+                    <div class="project" data-enName="zfh">
+                        <img src="../image/p6/banner.jpg" alt="" onclick="openWin('p6')">
+                        <div class="title flex">
+                            <div class="text">脏腑和</div>
+                            <img id="img4" src="../image/index4/set_off.png" alt="" onclick="selectProject(4)">
+                        </div>
+                    </div>
+                    <div class="project" data-enName="jsy">
+                        <img src="../image/p1/banner.jpg" alt="" onclick="openWin('p1')">
+                        <div class="title flex">
+                            <div class="text">肩舒雅</div>
+                            <img id="img5" src="../image/index4/set_off.png" alt="" onclick="selectProject(5)">
+                        </div>
+                    </div>
+                    <div class="project" data-enName="mbqd">
+                        <img src="../image/p4/banner.jpg" alt="" onclick="openWin('p4')">
+                        <div class="title flex">
+                            <div class="text">蜜臀清毒</div>
+                            <img id="img6" src="../image/index4/set_off.png" alt="" onclick="selectProject(6)">
+                        </div>
+                    </div>
+                    <div class="project" data-enName="sxjx">
+                        <img src="../image/p8/banner.jpg" alt="" onclick="openWin('p8')">
+                        <div class="title flex">
+                            <div class="text">舒心健胸</div>
+                            <img id="img7" src="../image/index4/set_off.png" alt="" onclick="selectProject(7)">
+                        </div>
+                    </div>
+                    <div class="project" data-enName="lgj">
+                        <img src="../image/p9/banner.jpg" alt="" onclick="openWin('p9')">
+                        <div class="title flex">
+                            <div class="text">肋骨净</div>
+                            <img id="img8" src="../image/index4/set_off.png" alt="" onclick="selectProject(8)">
+                        </div>
+                    </div>
+                    <div class="project" data-enName="gql">
+                        <img src="../image/p5/banner.jpg" alt="" onclick="openWin('p5')">
+                        <div class="title flex">
+                            <div class="text">骨轻灵</div>
+                            <img id="img9" src="../image/index4/set_off.png" alt="" onclick="selectProject(9)">
+                        </div>
+                    </div>
+                    <div class="project" data-enName="scjl">
+                        <img src="../image/p10/banner.jpg" alt="" onclick="openWin('p10')">
+                        <div class="title flex">
+                            <div class="text">三重净淋</div>
+                            <img id="img10" src="../image/index4/set_off.png" alt="" onclick="selectProject(10)">
+                        </div>
+                    </div>
+                    <!-- <div class="project" data-enName="msb">
+                        <img src="../image/index4/project.png" alt="">
+                        <div class="title flex">
+                            <div class="text">蜜十八</div>
+                            <img id="img11" src="../image/index4/set_off.png" alt="" onclick="selectProject(11)">
+                        </div>
+                    </div> -->
+                    <div class="project" data-enName="slkt">
+                        <img src="../image/p11/banner.jpg" alt="" onclick="openWin('p11')">
+                        <div class="title flex">
+                            <div class="text">舒淋康颈</div>
+                            <img id="img12" src="../image/index4/set_off.png" alt="" onclick="selectProject(12)">
+                        </div>
+                    </div>
+                    <!-- <div class="project" data-enName="mys">
+                        <img src="../image/index4/project.png" alt="">
+                        <div class="title flex">
+                            <div class="text">美颜塑</div>
+                            <img id="img13" src="../image/index4/set_off.png" alt="" onclick="selectProject(13)">
+                        </div>
+                    </div> -->
+                </div>
+
+            </div>
+
+            <!-- 推荐项目 -->
+            <div class="projectAi-wrapper" id="projectAi-wrapper">
+                <div class="title2">
+                    <img src="../image/index4/title.png" alt="">
+                </div>
+                <div class="project-content" id="projectAi-content">
+                    <div class="project projectAi" data-name="督脉元神">
+                        <img src="../image/p2/banner.jpg" alt="" onclick="openWin('p2')">
+                        <div class="title flex">
+                            督脉元神
+                            <img id="ai-img1" src="../image/index4/set_off.png" alt="" onclick="selectProject(1)">
+                        </div>
+                    </div>
+                    <div class="project projectAi" data-name="脑轻松">
+                        <img src="../image/p3/banner.jpg" alt="" onclick="openWin('p3')">
+                        <div class="title flex">
+                            脑轻松
+                            <img id="ai-img2" src="../image/index4/set_off.png" alt="" onclick="selectProject(2)">
+                        </div>
+                    </div>
+                    <div class="project projectAi" data-name="腰肾健">
+                        <img src="../image/p7/banner.jpg" alt="" onclick="openWin('p7')">
+                        <div class="title flex">
+                            腰肾健
+                            <img id="ai-img3" src="../image/index4/set_off.png" alt="" onclick="selectProject(3)">
+                        </div>
+                    </div>
+                    <div class="project projectAi" data-name="脏腑和">
+                        <img src="../image/p6/banner.jpg" alt="" onclick="openWin('p6')">
+                        <div class="title flex">
+                            脏腑和
+                            <img id="ai-img4" src="../image/index4/set_off.png" alt="" onclick="selectProject(4)">
+                        </div>
+                    </div>
+                    <div class="project projectAi" data-name="肩舒雅">
+                        <img src="../image/p1/banner.jpg" alt="" onclick="openWin('p1')">
+                        <div class="title flex">
+                            肩舒雅
+                            <img id="ai-img5" src="../image/index4/set_off.png" alt="" onclick="selectProject(5)">
+                        </div>
+                    </div>
+                    <div class="project projectAi" data-name="蜜臀清毒">
+                        <img src="../image/p4/banner.jpg" alt="" onclick="openWin('p4')">
+                        <div class="title flex">
+                            蜜臀清毒
+                            <img id="ai-img6" src="../image/index4/set_off.png" alt="" onclick="selectProject(6)">
+                        </div>
+                    </div>
+                    <div class="project projectAi" data-name="舒心健胸">
+                        <img src="../image/p8/banner.jpg" alt="" onclick="openWin('p8')">
+                        <div class="title flex">
+                            舒心健胸
+                            <img id="ai-img7" src="../image/index4/set_off.png" alt="" onclick="selectProject(7)">
+                        </div>
+                    </div>
+                    <div class="project projectAi" data-name="肋骨净">
+                        <img src="../image/p9/banner.jpg" alt="" onclick="openWin('p9')">
+                        <div class="title flex">
+                            肋骨净
+                            <img id="ai-img8" src="../image/index4/set_off.png" alt="" onclick="selectProject(8)">
+                        </div>
+                    </div>
+                    <div class="project projectAi" data-name="骨轻灵">
+                        <img src="../image/p5/banner.jpg" alt="" onclick="openWin('p5')">
+                        <div class="title flex">
+                            骨轻灵
+                            <img id="ai-img9" src="../image/index4/set_off.png" alt="" onclick="selectProject(9)">
+                        </div>
+                    </div>
+                    <div class="project projectAi" data-name="三重净淋">
+                        <img src="../image/p10/banner.jpg" alt="" onclick="openWin('p10')">
+                        <div class="title flex">
+                            三重净淋
+                            <img id="ai-img10" src="../image/index4/set_off.png" alt="" onclick="selectProject(10)">
+                        </div>
+                    </div>
+                    <!-- <div class="project projectAi" data-name="蜜十八">
+                        <img src="../image/index4/project.png" alt="">
+                        <div class="title flex">
+                            蜜十八
+                            <img id="ai-img11" src="../image/index4/set_off.png" alt="" onclick="selectProject(11)">
+                        </div>
+                    </div> -->
+                    <div class="project projectAi" data-name="舒淋康颈">
+                        <img src="../image/p11/banner.jpg" alt="" onclick="openWin('p11')">
+                        <div class="title flex">
+                            舒淋康颈
+                            <img id="ai-img12" src="../image/index4/set_off.png" alt="" onclick="selectProject(12)">
+                        </div>
+                    </div>
+                    <!-- <div class="project projectAi" data-name="美颜塑">
+                        <img src="../image/index4/project.png" alt="">
+                        <div class="title flex">
+                            美颜塑
+                            <img id="ai-img13" src="../image/index4/set_off.png" alt="" onclick="selectProject(13)">
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- 订单确认 -->
+            <div class="order-wrapper">
+                <div class="order-content">
+                    <div class="order-buy">
+                        <div class="title">
+                            已选项目 <div class="span">Selected service</div>
+                        </div>
+                        <div class="order-project" id="order-project">
+                        </div>
+                    </div>
+                    <div class="submit_btn" onclick="submit()">
+                        <img src="../image/index4/btn.png" alt="">
+                    </div>
+                </div>
+                <div class="order-bg" id="order-bg"></div>
+                <img src="../image/icon/closebtn.png" alt="" class="order-close" onclick="closeOrderMask()">
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script type="text/javascript">
+    let userinfo = ""
+    let aiFlag = 0
+    let save_record_params = {}
+    apiready = function () {
+        api.parseTapmode();
+        // tds.js 函数
+        tabCreate(1, 'frame')
+        /* 选择用户 => index3-4 */
+        api.addEventListener({
+            name: 'selectUser'
+        }, function (ret) {
+            isUser()
+        })
+        /* 订单mask => index4-1 */
+        api.addEventListener({
+            name: 'closeOrderMask'
+        }, function (ret) {
+            closeOrderMask()
+        })
+
+        // $api.css($api.dom('.order-wrapper'), 'display:block')
+        // api.openFrame({
+        //     name: 'index4-1',
+        //     url: 'index4-1' + '.html',
+        //     animation: {
+        //         type: 'fade',
+        //         duration: 300
+        //     },
+        //     rect: {
+        //         x: 0,
+        //         y: 0,
+        //         w: api.frameWidth,
+        //         h: api.frameHeight,
+        //     },
+        //     pageParam: {
+        //         save_record_params
+        //     },
+        //     bgColor: 'rgba(0,0,0,0)',
+        // });
+
+        strFn()
+        isUser()
+        isAi()
+    }
+
+    /* 判断用户 */
+    function isUser() {
+        userinfo = $api.getStorage('user_info') ? JSON.parse($api.getStorage('user_info')) : ''
+        if (userinfo) {
+            $api.css($api.dom('.user_off'), 'display:none')
+            $api.css($api.dom('.user_on'), 'display:block')
+            let sex = userinfo.gender == 0 ? '女士' : '先生'
+            $api.html($api.byId('user_name'), userinfo.nickname + `<div class="span">/${sex}</div>`)
+        }
+    }
+
+    /* 判断是否是做完体质检测后进入页面的 */
+    function isAi() {
+        if (api.pageParam.save_record_params) {
+            let data = api.pageParam.save_record_params.plan_ids
+            save_record_params = api.pageParam.save_record_params
+            console.log(JSON.stringify(data));
+            let str = ''
+            let projectAi = $api.domAll('.projectAi')
+            for (let i of data) {
+                for (let j = 0; j < projectAi.length; j++) {
+                    if (i == $api.attr(projectAi[j], 'data-name')) {
+                        str += `<div class="project projectAi" style="display:block" data-name="${$api.attr(projectAi[j], 'data-name')}">` + $api.html(projectAi[j]) + ` </div>`
+                        // $api.css(projectAi[j], 'display:block')
+                    }
+                }
+            }
+            $api.html($api.byId('projectAi-content'), str)
+            aiFlag = 1
+            let bg = $api.byId('video-bg')
+            let bg2 = $api.byId('video-bg2')
+            let projectWrapper = $api.byId('project-wrapper')
+            let projectAiWrapper = $api.byId('projectAi-wrapper')
+            $api.css(projectWrapper, "display:none")
+            $api.css(projectAiWrapper, "display:block")
+            $api.css(bg, "opacity:1")
+            $api.css(bg2, "opacity:0")
+            $api.css($api.byId('content-1-alert'), 'display:none')
+            // tds.js 函数
+            tabCreate(2, 'frame')
+        } else {
+            // tds.js 函数
+            tabCreate(1, 'frame')
+        }
+    }
+
+    /* 购物车确定按钮 */
+    function submit() {
+        if (userinfo) {
+            save_record_params.plan_ids = []
+            save_record_params.user_id = userinfo.id
+            let buy = $api.domAll('.buy')
+            for (let j = 0; j < buy.length; j++) {
+                if ($api.cssVal(buy[j], 'display') == 'block') {
+                    save_record_params.plan_ids.push($api.attr(buy[j], 'data-name'))
+                }
+            }
+
+            if (save_record_params.plan_ids.length != 0) {
+                $api.css($api.dom('.order-wrapper'), 'display:block')
+                let str = ''
+                for (let i in save_record_params.plan_ids) {
+                    str += `<div>${save_record_params.plan_ids[i]}</div>`
+                }
+                $api.html($api.byId("order-project"), str)
+                api.openFrame({
+                    name: 'index4-1',
+                    url: 'index4-1' + '.html',
+                    animation: {
+                        type: 'fade',
+                        duration: 300
+                    },
+                    rect: {
+                        x: 0,
+                        y: 0,
+                        w: api.frameWidth,
+                        h: api.frameHeight,
+                    },
+                    pageParam: {
+                        save_record_params
+                    },
+                    bgColor: 'rgba(0,0,0,0)',
+                });
+            } else {
+                toast('请选择项目之后再操作')
+            }
+        } else {
+            toast('请选择用户之后再操作')
+        }
+    }
+
+    /* 选择项目[选择的id] */
+    function selectProject(id) {
+        if (userinfo) {
+            let buy = $api.byId('buy' + id)
+            let img = $api.byId('img' + id)
+            let aiImg = $api.byId('ai-img' + id)
+            let src_on = '../image/index4/set_on.png'
+            let src_off = '../image/index4/set_off.png'
+
+            if ($api.attr(img, 'src') == src_off) {
+                $api.attr(img, 'src', src_on)
+                $api.css(img, 'top:1px')
+                $api.attr(aiImg, 'src', src_on)
+                $api.css(aiImg, 'top:1px')
+                $api.css(buy, 'display:block')
+            } else {
+                $api.attr(img, 'src', src_off)
+                $api.css(img, 'top:0px')
+                $api.attr(aiImg, 'src', src_off)
+                $api.css(aiImg, 'top:0px')
+                $api.css(buy, 'display:none')
+            }
+        } else {
+            toast('请选择用户之后再操作')
+        }
+    }
+
+    /* 项目搜索 */
+    function searchProject() {
+        let val = $api.val($api.byId('search'))
+        if (val) {
+            val = val.toLowerCase().replace(/\s*/g, "")
+        }
+        let obj = document.getElementById("project-wrapper").children[1].children
+        for (let i = 0; i < obj.length; i++) {
+            obj[i].style.display = 'none'
+            let cn_name = obj[i].getElementsByClassName('text')[0].innerHTML
+            let en_name = obj[i].getAttribute('data-enName')
+            if (cn_name.indexOf(val) != -1 || en_name.indexOf(val) != -1) {
+                obj[i].style.display = 'block'
+            }
+        }
+    }
+
+    /* 打开项目库[要打开的id] */
+    let projectLibrary_time = ''
+    let content1 = $api.byId('content-1')
+    let content1Alert = $api.byId('content-1-alert')
+    let content1_top = parseFloat($api.cssVal(content1, 'top')) - (parseFloat($api.cssVal(content1Alert, 'height')) * 2.5) - 5 + 'px'
+    let content1_left = parseFloat($api.cssVal(content1, 'left')) - (parseFloat($api.cssVal(content1Alert, 'width')) / 1.7) + 'px'
+    $api.css(content1Alert, `top:${parseFloat(content1_top) - 5}px;left:${parseFloat(content1_left)}px;opacity:0;`)
+    function projectLibrary(params) {
+        let bg = $api.byId('video-bg')
+        let bg2 = $api.byId('video-bg2')
+        let projectWrapper = $api.byId('project-wrapper')
+        let projectAiWrapper = $api.byId('projectAi-wrapper')
+
+        if (params == 1) {
+            if (aiFlag == 1) {
+                $api.css(bg, "opacity:1")
+                $api.css(bg2, "opacity:0")
+                $api.css(projectWrapper, "display:none")
+                $api.css(projectAiWrapper, "display:block")
+            }
+            clearTimeout(projectLibrary_time)
+            $api.css(content1Alert, `top:${content1_top};left:${content1_left};opacity:1;`)
+            projectLibrary_time = setTimeout(() => {
+                $api.css(content1Alert, `top:${parseFloat(content1_top) - 5}px;left:${parseFloat(content1_left)}px;opacity:0;`)
+            }, 2000)
+        } else {
+            if (aiFlag == 1) {
+                $api.css(bg, "opacity:0")
+                $api.css(bg2, "opacity:1")
+                $api.css(projectWrapper, "display:block")
+                $api.css(projectAiWrapper, "display:none")
+            }
+        }
+    }
+
+    /* 订单mask */
+    function closeOrderMask() {
+        maskClose('order-bg')
+        api.closeFrame({ name: 'index4-1' })
+    }
+
+    function strFn() {
+        let time = getNowFormatDate('.')
+        let judge = judgeFn()
+        let str = `${time} <span>/</span> ${judge}`
+        $api.html($api.byId('date'), str)
+    }
+
+    /* 获取当天二十四节气，如果当天不属于节气返回季节 */
+    function judgeFn() {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        let judge = getjq(year, month, strDate)
+
+        return judge
+    }
+
+    /* 二十四节气算法(年,月,日) */
+    function getjq(yyyy, mm, dd) {
+        mm = mm - 1;
+        let sTermInfo = new Array(0, 21208, 42467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758);
+        let solarTerm = new Array("小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至");
+        let solarTerms = "";
+        //　　此方法是获取该日期是否为某节气
+        let tmp1 = new Date((31556925974.7 * (yyyy - 1900) + sTermInfo[mm * 2 + 1] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+        let tmp2 = tmp1.getUTCDate();
+        if (tmp2 == dd)
+            solarTerms = solarTerm[mm * 2 + 1];
+        tmp1 = new Date((31556925974.7 * (yyyy - 1900) + sTermInfo[mm * 2] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+        tmp2 = tmp1.getUTCDate();
+        if (tmp2 == dd)
+            solarTerms = solarTerm[mm * 2];
+        if (yyyy == '2022' && mm == '08' && dd == '07') {
+            solarTerms = '白露'
+        } else if (yyyy == '2022' && mm == '08' && dd == '08') {
+            solarTerms = ''
+        }
+
+        //　　此方法可以获取该日期处于某节气
+        while (solarTerms == "") {
+            let tmp1 = new Date((31556925974.7 * (yyyy - 1900) + sTermInfo[mm * 2 + 1] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+            let tmp2 = tmp1.getUTCDate();
+            if (tmp2 == dd) solarTerms = solarTerm[mm * 2 + 1];
+            tmp1 = new Date((31556925974.7 * (yyyy - 1900) + sTermInfo[mm * 2] * 60000) + Date.UTC(1900, 0, 6, 2, 5));
+            tmp2 = tmp1.getUTCDate(); if (tmp2 == dd) solarTerms = solarTerm[mm * 2];
+            if (dd > 1) {
+                dd = dd - 1;
+            } else {
+                mm = mm - 1;
+                if (mm < 0) {
+                    yyyy = yyyy - 1; mm = 11;
+                }
+                dd = 31;
+            }
+            if (solarTerms == '立春' || solarTerms == '雨水' || solarTerms == '惊蛰' || solarTerms == '春分' || solarTerms == '清明' || solarTerms == '谷雨') {
+                solarTerms = '春季'
+            } else if (solarTerms == '立夏' || solarTerms == '小满' || solarTerms == '芒种' || solarTerms == '夏至' || solarTerms == '小暑' || solarTerms == '大暑') {
+                solarTerms = '夏季'
+            } else if (solarTerms == '立秋' || solarTerms == '处暑' || solarTerms == '白露' || solarTerms == '秋分' || solarTerms == '寒露' || solarTerms == '寒露') {
+                solarTerms = '秋季'
+            } else if (solarTerms == '立冬' || solarTerms == '小雪' || solarTerms == '大雪' || solarTerms == '冬至' || solarTerms == '小寒' || solarTerms == '大寒') {
+                solarTerms = '冬季'
+            }
+        }
+
+        return solarTerms;
+    }
+
+    // 搜索
+    $api.addEvt($api.byId('search'), 'keypress', function (e) {
+        if (e.keyCode == 13) {
+            searchProject()
+        }
+    });
+</script>
+
+</html>

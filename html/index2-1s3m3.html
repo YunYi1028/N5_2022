@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<style media="screen">
+		body {
+			margin: 0;
+			background-color: transparent;
+		}
+
+		.b1 {
+			position: absolute;
+			width: 250px;
+			height: 240px;
+			right: 80px;
+			bottom: 70px;
+			opacity: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<video src="../res/index2/index2-1/slide3-m3.mp4" class="bg" id="bg" autoplay loop muted preload tapmode
+		onclick=""></video>
+		<button class="b1" tapmode onclick="playVideo('../res/index2/index2-1/slide3-m3d1.mp4')"></button>
+	<img src="../image/crossbtn.png" alt="" class="crossbtn" tapmode onclick="closeFn()">
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/anime.js"></script>
+	<script type="text/javascript" src="../script/tds1.0.js"></script>
+	<script type="text/javascript" src="../script/ajax.js"></script>
+	<script type="text/javascript">
+		apiready = function () {
+			api.parseTapmode();
+		}
+		
+		function playVideo(src) {
+			api.openFrame({
+				name: 'halfvideo',
+				url: 'halfvideo.html',
+				rect: {
+					x: 337,
+					y: 0,
+					w: 'auto',
+					h: 'auto'
+				},
+				animation: {
+					type: 'fade',
+					subType: 'from_left',
+					duration: 600
+				},
+				pageParam: {
+					'src': src
+				},
+				reload:true,
+				bgColor: 'rgba(0,0,0,0)',
+			});
+		}
+
+		/* tabCreate关闭按钮fn */
+		function closeFn() {
+			closeFrame()
+		}
+	</script>
+</body>
+
+</html>

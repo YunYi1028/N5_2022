@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/tds.css">
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
+    <style media="screen">
+        .page {
+            background-color: #fff;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .slide-inner {
+            width: 100%;
+            height: 100%;
+        }
+
+        #slide3-video,
+        #slide2-video,
+        #slide2-video2,
+        #slide2-video3 {
+            z-index: 2;
+            opacity: 0;
+            transition: 1s all;
+        }
+
+        #slide2-video {
+            opacity: 1;
+        }
+
+        .slide3-select {
+            z-index: 3;
+            position: absolute;
+            transform: translateX(-50%);
+            bottom: 0;
+            left: 51%;
+            width: 90%;
+            height: 100%;
+        }
+
+        .slide3-select * {
+            height: 100%;
+            float: left;
+        }
+
+        .slide3-select-1 {
+            width: 21%;
+        }
+
+        .slide3-select-2 {
+            width: 17.5%;
+            margin-left: 3px;
+        }
+
+        .slide3-select-3 {
+            width: 19%;
+            margin-left: 14px;
+        }
+
+        .slide3-select-4 {
+            width: 19%;
+            margin-left: 5px;
+        }
+
+        .slide3-select-5 {
+            width: 20.5%;
+            margin-left: 1px;
+        }
+
+        .slide2-select {
+            z-index: 3;
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide2-select * {
+            width: 6%;
+            height: 33%;
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            left: 10%;
+            top: 46%;
+        }
+
+        .slide2-select-3 {
+            width: 100%;
+            height: 100%;
+            left: 50%;
+            top: 50%;
+        }
+
+        .slide2-select-2 {
+            left: 87%;
+        }
+
+        .video-wrapper {
+            visibility: hidden;
+            transition: 0.5s all;
+        }
+
+        .openFrameIcon {
+            position: absolute;
+            left: 0;
+            bottom: 40px;
+            width: 60px;
+            z-index: 9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- logo -->
+        <div class="logo">
+            <img src="../image/index_logo.png" alt="">
+        </div>
+
+        <!-- swiper -->
+        <div class="swiper">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide swiper-slide1">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index1/slide1-bg.jpg" alt="" class="bg" id="slide1-video-bg-img">
+                        <div class="video-wrapper">
+                            <!-- <video src="../res/index1/slide1-1.mp4" class="bg" autoplay loop></video> -->
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+
+                        <img class="openFrameIcon" src="../image/voice/openFrame.png" alt="开始考核"
+                            onclick="openFrame('voice')">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide2">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index1/slide2-bg.jpg" alt="" class="bg" id="slide2-video-bg-img">
+                        <div class="video-wrapper">
+                            <!-- <video src="../res/index1/slide2-1.mp4" class="bg slide2-video" id="slide2-video" autoplay
+                                loop></video>
+                            <video src="../res/index1/slide2-2.mp4" class="bg slide2-video" id="slide2-video2" autoplay
+                                loop></video>
+                            <video src="../res/index1/slide2-3.mp4" class="bg slide2-video" id="slide2-video3" autoplay
+                                loop></video> -->
+                        </div>
+                        <div class="slide2-select">
+                            <div class="slide2-select-3" tapmode onclick="slide2Video(1)"></div>
+                            <div class="slide2-select-1" tapmode onclick="slide2Video(2)"></div>
+                            <div class="slide2-select-2" tapmode onclick="slide2Video(3)"></div>
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrownext">
+                    </div>
+                </div>
+
+                <div class="swiper-slide swiper-slide3">
+                    <div class="slide-inner">
+                        <!-- swiper容器内 -->
+                        <img src="../image/index1/slide3_bg.png" alt="" class="bg slide3-bg" id="slide3-video-bg-img">
+                        <div class="video-wrapper">
+                            <!-- <video src="" class="bg" id="slide3-video" loop muted></video> -->
+                        </div>
+
+                        <div class="slide3-select">
+                            <div class="slide3-select-1" tapmode onclick="slide3Video(1)"></div>
+                            <div class="slide3-select-2" tapmode onclick="slide3Video(2)"></div>
+                            <div class="slide3-select-3" tapmode onclick="slide3Video(3)"></div>
+                            <div class="slide3-select-4" tapmode onclick="slide3Video(4)"></div>
+                            <div class="slide3-select-5" tapmode onclick="slide3Video(5)"></div>
+                        </div>
+
+                        <!-- 箭头 -->
+                        <img src="../image/icon/arrow.gif" alt="" class="arrowpre">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script src="../script/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+
+    apiready = function () {
+        api.parseTapmode();
+        // tds.js 函数
+        tabCreate(1, 'frame')
+    }
+
+    function openFrame(src) {
+        api.openFrame({
+            name: src,
+            url: src + '.html',
+            rect: {
+                marginLeft: 10,
+                marginBottom: 40,
+                w: 440,
+                h: 470
+            },
+            pageParam: {
+                set: src
+            },
+            animation: {
+                type: 'fade',
+                subType: 'from_bottom',
+                duration: 1000
+            },
+            bounces: false,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: true,
+            hScrollBarEnabled: true
+        });
+    }
+
+    /* 播放对应视频[传入需要渲染的index] */
+    let videoWrapper = $api.domAll('.video-wrapper')
+    let activeIndex = ''
+    function playCorrespondingVideo(activeIndex) {
+        let str0 = `<video src="../res/index1/slide1-1.mp4" class="bg" autoplay loop muted></video>`
+        let str1 = `<video src="../res/index1/slide2-1.mp4" class="bg slide2-video" id="slide2-video1" autoplay
+                                loop muted></video>
+                    <video src="../res/index1/slide2-2.mp4" class="bg slide2-video" id="slide2-video2" autoplay
+                                loop muted></video>
+                    <video src="../res/index1/slide2-3.mp4" class="bg slide2-video" id="slide2-video3" autoplay
+                                loop muted></video>`
+        let str2 = `<video src="" class="bg" id="slide3-video" loop muted></video>`
+        let videoHtml = [str0, str1, str2]
+
+        for (let i = 0; i < videoWrapper.length; i++) {
+            if (i == activeIndex) {
+                $api.html(videoWrapper[i], videoHtml[activeIndex])
+                $api.css(videoWrapper[i], 'visibility:visible')
+                // if (i == 0) {
+                //     $api.css($api.dom('.logo'), "top:-20%;opacity:0")
+                // } else if (i == 1) {
+                //     $api.css($api.dom('.logo'), "top:-3%;opacity:1")
+                // }
+            } else {
+                $api.html(videoWrapper[i], '')
+                $api.css(videoWrapper[i], 'visibility:hidden;')
+            }
+        }
+    }
+
+    /* swiper参数 */
+    let swiperOptions = {
+        speed: 750, // 单页的滑动过渡消耗时间
+        direction: 'vertical', // 水平方向切换 horizontal 或垂直方向切换 vertical
+        on: {
+            /* swiper初始化 */
+            init: function (swiper) {
+                activeIndex = this.activeIndex
+                playCorrespondingVideo(activeIndex)
+            },
+            /* swiper从当前slide开始过渡到另一个slide时执行 */
+            slideChangeTransitionStart: function () {
+                activeIndex = this.activeIndex
+                playCorrespondingVideo(activeIndex)
+            },
+            /* 触摸释放时执行 */
+            touchEnd: function () {
+                if (this.isEnd && this.touches.currentY < this.touches.startY) {
+                    toast('滑到头啦')
+                }
+            }
+        },
+    }
+    let swiper = new Swiper('.swiper', swiperOptions)
+
+    /* slide2视频选择播放 */
+    function slide2Video(num) {
+        let videoAll = $api.domAll('.slide2-video')
+        let video = $api.byId('slide2-video' + num)
+        for (let i = 0; i < videoAll.length; i++) {
+            $api.css(videoAll[i], 'opacity:0;');
+        }
+        $api.css(video, 'opacity:1;');
+    }
+
+    /* slide3视频选择播放 */
+    let slide3VideoSettime = ''
+    function slide3Video(num) {
+        clearTimeout(slide3VideoSettime)
+        slide3VideoSettime = setTimeout(() => {
+            let video = $api.byId('slide3-video')
+            video.addEventListener('play', function () {
+                $api.css(video, 'opacity:1;');
+            });
+            $api.css(video, 'opacity:0;');
+            $api.attr(video, 'src', `../res/index1/slide3-${num}.mp4`);
+            video.load()
+            video.play()
+        }, 200);
+    }
+
+</script>
+
+</html>

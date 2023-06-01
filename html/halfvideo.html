@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<style media="screen">
+		body {
+			margin: 0;
+			background-color: transparent;
+		}
+
+		.closebtn {
+			position: absolute;
+			right: 80px;
+			top: 60px;
+		}
+
+		.index0d2-wrapper {
+			position: absolute;
+			transform: translateX(-50%) translateY(-50%);
+			left: 50.5%;
+			top: 51.2%;
+			width: 15%;
+			height: 63.5%;
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<video src="" class="bg" id="bg" autoplay loop muted preload tapmode onclick="closeFrame()"></video>
+<!-- 	<img src="../image/crossbtn.png" alt="" class="crossbtn" tapmode onclick="closeFrame()"> -->
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/anime.js"></script>
+	<script type="text/javascript" src="../script/tds1.0.js"></script>
+	<script type="text/javascript" src="../script/ajax.js"></script>
+	<script type="text/javascript">
+		apiready = function () {
+			api.parseTapmode();
+
+			$api.byId('bg').src = "../res/" + api.pageParam.src;
+		}
+
+		/* tabCreate关闭按钮fn */
+		function closeFn() {
+			closeFrame()
+		}
+	</script>
+</body>
+
+</html>

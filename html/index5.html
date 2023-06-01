@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<link rel="stylesheet" href="../css/swiper-bundle.min.css">
+	<style media="screen">
+		.button {
+			width: 24%;
+			height: 50%;
+			position: absolute;
+			transform: translateX(-50%) translateY(-50%);
+			left: 20%;
+			top: 55%;
+		}
+
+		.button-2 {
+			left: 50%;
+		}
+
+		.button-3 {
+			left: 80%;
+		}
+
+		.content-1 {
+			width: 12%;
+			left: 19.7%;
+			top: 85%;
+			opacity: 0;
+			transition: 0.25s all;
+		}
+
+		.content-1-btnWrapper {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+			padding-top: 18%;
+		}
+
+		.content-1-btnWrapper-button {
+			width: 100%;
+			height: 20%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="page">
+		<!-- logo -->
+		<div class="logo">
+			<img src="../image/index_logo.png" alt="">
+		</div>
+
+		<!-- 背景 -->
+		<video src="../res/index5/bg.mp4" class="bg" poster="../image/index5/bg.jpg" autoplay loop muted
+			id="vidBg"></video>
+		<img src="../image/index5/bg.png" class="bg" alt="">
+
+		<!-- content -->
+		<div class="content-wrapper">
+			<div class="content content-1">
+				<img src="../image/index5/content1.png" alt="">
+				<div class="content-1-btnWrapper flex-d">
+					<div class="content-1-btnWrapper-button" onclick="centent1Btn(1)"></div>
+					<div class="content-1-btnWrapper-button" onclick="centent1Btn(2)"></div>
+					<div class="content-1-btnWrapper-button" onclick="centent1Btn(3)"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="button-wrapper">
+			<div class="button button-1" onclick="btnSelect(1)"></div>
+			<div class="button button-2" onclick="btnSelect(2)"></div>
+			<div class="button button-3" onclick="btnSelect(3)"></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/tds1.0.js"></script>
+<script type="text/javascript" src="../script/ajax.js"></script>
+<script src="../script/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+	apiready = function () {
+		api.parseTapmode();
+		// tds.js 函数
+		tabCreate(1, 'frame')
+
+		setTimeout(() => {
+			let logo = $api.dom('.logo')
+			$api.css(logo, "top:-20%;opacity:0")
+		}, 200);
+
+		api.addEventListener({
+			name: 'openNoTab'
+		}, function (ret) {
+			setTimeout(() => {
+				$api.attr($api.byId('vidBg'), 'src', '')
+			}, 300);
+		})
+
+		api.addEventListener({
+			name: 'closeNoTba'
+		}, function (ret) {
+			$api.attr($api.byId('vidBg'), 'src', '../res/index5/bg.mp4')
+		})
+	}
+
+	function centent1Btn(params) {
+		btnSelect(1)
+		set_tabBar('index5-1', 'notab', { show: params })
+	}
+
+	function btnSelect(params) {
+		if (params == 1) {
+			if ($api.cssVal($api.dom('.content-1'), 'opacity') == 0) {
+				$api.css($api.dom('.content-1'), 'opacity:1;')
+				/* 调整 frame 到前面 */
+				api.bringFrameToFront({
+					from: 'index5',
+				});
+			} else {
+				$api.css($api.dom('.content-1'), 'opacity:0;')
+				/* 调整 frame 到前面 */
+				api.bringFrameToFront({
+					from: 'tab_bar',
+				});
+			}
+		} else if (params == 2) {
+			set_tabBar('index5-2', 'notab', { notab: '' })
+			$api.css($api.dom('.content-1'), 'opacity:0;')
+			/* 调整 frame 到前面 */
+			api.bringFrameToFront({
+				from: 'tab_bar',
+			});
+		} else if (params == 3) {
+			set_tabBar('index5-3', 'notab', { notab: '' })
+			$api.css($api.dom('.content-1'), 'opacity:0;')
+			/* 调整 frame 到前面 */
+			api.bringFrameToFront({
+				from: 'tab_bar',
+			});
+		}
+	}
+
+	function closeFn() {
+		api.closeFrame()
+	}
+</script>
+
+</html>

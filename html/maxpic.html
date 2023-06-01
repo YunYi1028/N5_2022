@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/tds.css">
+	<style media="screen">
+		body {
+			margin: 0;
+			background-color: transparent;
+		}
+
+		.closebtn{
+			right: 30px;
+			top: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<img alt="" class="bg" id="image">
+<!-- 	<div class="closebtn">
+		<img src="../image/back.png" class="key" tapmode onclick="closeFrame()">
+	</div> -->
+	<div id="bgm">
+		<audio id="click" src="../res/click.wav"></audio>
+	</div>
+	<div class="clearfix"></div>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/tds1.0.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			var expert = document.getElementById("image");
+			var set = api.pageParam.src;
+			expert.src = "../image/" + set
+		}
+
+		//调用
+		window.onclick = function() {
+			closeFrame();
+		}
+	</script>
+</body>
+
+</html>
